@@ -1,0 +1,30 @@
+{{ define "main" }}
+  <article class="section">
+    <h2 style="margin:0 0 0.35rem">{{ .Title }}</h2>
+    {{ with .Params.authors }}
+      <div class="item__meta">{{ delimit . ", " }}</div>
+    {{ end }}
+    {{ with .Params.venue }}
+      <div class="item__meta">{{ . }}{{ with $.Params.year }} · {{ . }}{{ end }}</div>
+    {{ end }}
+    {{ with .Params.tags }}
+      <div class="hero__affiliations" style="margin:0.75rem 0 0.85rem">
+        {{ range . }}
+          <span class="chip">{{ . }}</span>
+        {{ end }}
+      </div>
+    {{ end }}
+
+    {{ $links := .Params.links }}
+    {{ if $links }}
+      <div class="pub-actions" style="margin-bottom:1rem">
+        {{ with $links.pdf }}<a class="btn" href="{{ . }}" target="_blank" rel="noopener">PDF</a>{{ end }}
+        {{ with $links.code }}<a class="btn" href="{{ . }}" target="_blank" rel="noopener">Code</a>{{ end }}
+        {{ with $links.project }}<a class="btn" href="{{ . }}" target="_blank" rel="noopener">Project</a>{{ end }}
+      </div>
+    {{ end }}
+
+    <div class="prose">{{ .Content }}</div>
+  </article>
+{{ end }}
+

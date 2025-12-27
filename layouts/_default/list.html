@@ -1,0 +1,23 @@
+{{ define "main" }}
+  <div class="prose">
+    <h1>{{ .Title }}</h1>
+    {{ if .Content }}{{ .Content }}{{ end }}
+  </div>
+
+  {{ $pages := .Pages }}
+  {{ if not (len $pages) }}
+    <div class="section">No content yet.</div>
+  {{ else }}
+    <div class="section">
+      <div class="news">
+        {{ range $pages.ByDate.Reverse }}
+          <div class="news-item">
+            <div class="news-item__date">{{ .Date.Format "2006-01-02" }}</div>
+            <div><a href="{{ .RelPermalink }}">{{ .Title }}</a></div>
+          </div>
+        {{ end }}
+      </div>
+    </div>
+  {{ end }}
+{{ end }}
+

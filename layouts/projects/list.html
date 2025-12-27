@@ -1,0 +1,18 @@
+{{ define "main" }}
+  <section class="section">
+    <h2>{{ .Title }}</h2>
+    {{ if .Content }}<div class="prose">{{ .Content }}</div>{{ end }}
+
+    {{ $projects := .Pages.ByDate.Reverse }}
+    {{ if not (len $projects) }}
+      <div class="item__meta">Add project pages under <code>content/projects/</code>.</div>
+    {{ else }}
+      <div class="pub-list">
+        {{ range $projects }}
+          {{ partial "project-card.html" . }}
+        {{ end }}
+      </div>
+    {{ end }}
+  </section>
+{{ end }}
+

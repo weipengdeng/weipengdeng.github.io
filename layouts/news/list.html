@@ -1,0 +1,21 @@
+{{ define "main" }}
+  <section class="section">
+    <h2>{{ .Title }}</h2>
+    {{ if .Content }}<div class="prose">{{ .Content }}</div>{{ end }}
+
+    {{ $news := .Pages.ByDate.Reverse }}
+    {{ if not (len $news) }}
+      <div class="item__meta">Add Markdown files under <code>content/news/</code>.</div>
+    {{ else }}
+      <div class="news">
+        {{ range $news }}
+          <div class="news-item">
+            <div class="news-item__date">{{ .Date.Format "2006-01-02" }}</div>
+            <div><a href="{{ .RelPermalink }}">{{ .Title }}</a></div>
+          </div>
+        {{ end }}
+      </div>
+    {{ end }}
+  </section>
+{{ end }}
+

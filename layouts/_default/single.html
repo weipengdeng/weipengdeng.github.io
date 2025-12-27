@@ -1,0 +1,8 @@
+{{ define "main" }}
+  <article class="prose">
+    <h1>{{ .Title }}</h1>
+    {{ if .Description }}<p class="item__meta">{{ .Description }}</p>{{ end }}
+    {{ .Content }}
+  </article>
+{{ end }}
+

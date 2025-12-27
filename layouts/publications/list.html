@@ -1,0 +1,33 @@
+{{ define "main" }}
+  <section class="section">
+    <h2>{{ .Title }}</h2>
+    {{ if .Content }}<div class="prose">{{ .Content }}</div>{{ end }}
+
+    {{ $pubs := .Pages.ByDate.Reverse }}
+    {{ if not (len $pubs) }}
+      <div class="item__meta">Add Markdown files under <code>content/publications/</code> (or generate them from a <code>.bib</code> file).</div>
+    {{ else }}
+      {{ $tags := slice }}
+      {{ range $pubs }}
+        {{ range .Params.tags }}
+          {{ $tags = $tags | append . }}
+        {{ end }}
+      {{ end }}
+      {{ $tags = $tags | collections.Uniq | sort }}
+
+      <div class="pub-controls" role="toolbar" aria-label="Publication filters">
+        <button class="filter-btn" type="button" data-pub-filter="all" aria-pressed="true">All</button>
+        {{ range $tags }}
+          <button class="filter-btn" type="button" data-pub-filter="{{ . }}" aria-pressed="false">{{ . }}</button>
+        {{ end }}
+      </div>
+
+      <div class="pub-list">
+        {{ range $pubs }}
+          {{ partial "publication-card.html" . }}
+        {{ end }}
+      </div>
+    {{ end }}
+  </section>
+{{ end }}
+

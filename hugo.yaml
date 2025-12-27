@@ -1,0 +1,50 @@
+baseURL: "https://weipengdeng.github.io/"
+languageCode: "en-us"
+title: "Weipeng Deng"
+enableRobotsTXT: true
+paginate: 25
+
+taxonomies:
+  tag: "tags"
+
+menu:
+  main:
+    - name: "Home"
+      pageRef: "/"
+      weight: 10
+    - name: "Publications"
+      pageRef: "/publications"
+      weight: 20
+    - name: "Projects"
+      pageRef: "/projects"
+      weight: 30
+    - name: "News"
+      pageRef: "/news"
+      weight: 40
+    - name: "CV"
+      pageRef: "/cv"
+      weight: 50
+    - name: "Contact"
+      pageRef: "/contact"
+      weight: 60
+
+params:
+  author: "Weipeng Deng"
+  description: "Personal academic portfolio."
+
+  social:
+    email: "you@example.com"
+    github: "https://github.com/your-handle"
+    scholar: ""
+    linkedin: ""
+    twitter: ""
+
+  analytics:
+    clustrmaps:
+      enabled: false
+      embed: ""
+
+markup:
+  highlight:
+    noClasses: true
+

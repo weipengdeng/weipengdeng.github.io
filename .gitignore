@@ -1,0 +1,10 @@
+/.hugo_build.lock
+/public/
+/resources/_gen/
+
+# OS/editor
+Thumbs.db
+Desktop.ini
+.DS_Store
+.vscode/
+

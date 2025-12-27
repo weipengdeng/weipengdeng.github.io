@@ -1,0 +1,20 @@
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="{{ "/" | relURL }}">
+      <span class="brand__dot" aria-hidden="true"></span>
+      <span>{{ .Site.Title }}</span>
+    </a>
+
+    <nav class="nav-links" aria-label="Primary navigation">
+      {{ range .Site.Menus.main }}
+        {{ $isCurrent := or ($.IsMenuCurrent "main" .) ($.HasMenuCurrent "main" .) }}
+        <a href="{{ .URL }}" {{ if $isCurrent }}aria-current="page"{{ end }}>{{ .Name }}</a>
+      {{ end }}
+      <button class="theme-toggle" id="theme-toggle" type="button">
+        <span data-theme-icon aria-hidden="true">☀</span>
+        <span style="font-weight:700">Theme</span>
+      </button>
+    </nav>
+  </div>
+</header>
+

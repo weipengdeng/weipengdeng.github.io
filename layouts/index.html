@@ -1,0 +1,155 @@
+{{ define "main" }}
+  {{ $p := .Params.profile }}
+  <section class="hero">
+    <div class="avatar">
+      {{ $headshotPath := "" }}
+      {{ if $p }}{{ $headshotPath = $p.headshot }}{{ end }}
+      {{ $headshotRes := nil }}
+      {{ with $headshotPath }}
+        {{ $matches := resources.Match . }}
+        {{ if gt (len $matches) 0 }}
+          {{ $headshotRes = index $matches 0 }}
+        {{ end }}
+      {{ end }}
+      {{ if $headshotRes }}
+        {{ $img := $headshotRes.Fill "340x340 webp q85" }}
+        <img src="{{ $img.RelPermalink }}" width="170" height="170" alt="{{ $p.name | default .Site.Title }}" loading="eager" decoding="async" />
+      {{ else }}
+        <div class="avatar__fallback">{{ (substr (.Site.Title | default "A") 0 1) }}</div>
+      {{ end }}
+    </div>
+    <div>
+      <h1>{{ $p.name | default .Site.Title }}</h1>
+      {{ if $p.role }}<p class="hero__role">{{ $p.role }}</p>{{ end }}
+      {{ if $p.affiliations }}
+        <ul class="hero__affiliations">
+          {{ range $p.affiliations }}
+            <li><span class="chip">{{ . }}</span></li>
+          {{ end }}
+        </ul>
+      {{ end }}
+      {{ partial "social.html" . }}
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>News</h2>
+    {{ $news := where .Site.RegularPages "Section" "news" }}
+    {{ if not (len $news) }}
+      <div class="item__meta">Add Markdown files under <code>content/news/</code>.</div>
+    {{ else }}
+      <div class="news">
+        {{ range first 6 (sort $news "Date" "desc") }}
+          <div class="news-item">
+            <div class="news-item__date">{{ .Date.Format "2006-01-02" }}</div>
+            <div><a href="{{ .RelPermalink }}">{{ .Title }}</a></div>
+          </div>
+        {{ end }}
+      </div>
+      <div style="margin-top:0.9rem"><a class="btn" href="{{ (.Site.GetPage "section" "news").RelPermalink }}">All news</a></div>
+    {{ end }}
+  </section>
+
+  <section class="section">
+    <h2>Academic Profile</h2>
+    <div class="grid-3">
+      <div class="card">
+        <h3>Education</h3>
+        {{ range $edu := .Params.education }}
+          <div class="item">
+            <div class="logo">
+              {{ $logoRes := nil }}
+              {{ with $edu.logo }}
+                {{ $matches := resources.Match . }}
+                {{ if gt (len $matches) 0 }}
+                  {{ $logoRes = index $matches 0 }}
+                {{ end }}
+              {{ end }}
+              {{ if $logoRes }}
+                {{ $logoImg := $logoRes.Fit "80x80 webp q80" }}
+                <img src="{{ $logoImg.RelPermalink }}" alt="{{ $edu.institution }} logo" loading="lazy" decoding="async" />
+              {{ else }}
+                {{ $edu.short | default "ED" }}
+              {{ end }}
+            </div>
+            <div>
+              <div class="item__title">{{ $edu.degree }}</div>
+              <div class="item__meta">{{ $edu.institution }}{{ with $edu.dates }} · {{ . }}{{ end }}</div>
+            </div>
+          </div>
+        {{ end }}
+      </div>
+      <div class="card">
+        <h3>Experience</h3>
+        {{ range $exp := .Params.experience }}
+          <div class="item">
+            <div class="logo">
+              {{ $logoRes := nil }}
+              {{ with $exp.logo }}
+                {{ $matches := resources.Match . }}
+                {{ if gt (len $matches) 0 }}
+                  {{ $logoRes = index $matches 0 }}
+                {{ end }}
+              {{ end }}
+              {{ if $logoRes }}
+                {{ $logoImg := $logoRes.Fit "80x80 webp q80" }}
+                <img src="{{ $logoImg.RelPermalink }}" alt="{{ $exp.org }} logo" loading="lazy" decoding="async" />
+              {{ else }}
+                {{ $exp.short | default "XP" }}
+              {{ end }}
+            </div>
+            <div>
+              <div class="item__title">{{ $exp.title }}</div>
+              <div class="item__meta">{{ $exp.org }}{{ with $exp.dates }} · {{ . }}{{ end }}</div>
+              {{ with $exp.summary }}<div class="item__meta">{{ . }}</div>{{ end }}
+            </div>
+          </div>
+        {{ end }}
+      </div>
+      <div class="card">
+        <h3>Honors &amp; Awards</h3>
+        {{ range .Params.awards }}
+          <div class="item">
+            <div class="logo">{{ .level | default "★" }}</div>
+            <div>
+              <div class="item__title">{{ .title }}</div>
+              <div class="item__meta">{{ .org }}{{ with .year }} · {{ . }}{{ end }}</div>
+              {{ with .level }}<div style="margin-top:0.35rem"><span class="badge">{{ . }}</span></div>{{ end }}
+            </div>
+          </div>
+        {{ end }}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Publications</h2>
+    {{ $pubs := where .Site.RegularPages "Section" "publications" }}
+    {{ if not (len $pubs) }}
+      <div class="item__meta">Add Markdown files under <code>content/publications/</code> (or generate them from a <code>.bib</code> file).</div>
+    {{ else }}
+      {{ $tags := slice }}
+      {{ range $pubs }}
+        {{ range .Params.tags }}
+          {{ $tags = $tags | append . }}
+        {{ end }}
+      {{ end }}
+      {{ $tags = $tags | collections.Uniq | sort }}
+
+      <div class="pub-controls" role="toolbar" aria-label="Publication filters">
+        <button class="filter-btn" type="button" data-pub-filter="all" aria-pressed="true">All</button>
+        {{ range $tags }}
+          <button class="filter-btn" type="button" data-pub-filter="{{ . }}" aria-pressed="false">{{ . }}</button>
+        {{ end }}
+      </div>
+
+      <div class="pub-list">
+        {{ range (sort $pubs "Date" "desc") }}
+          {{ partial "publication-card.html" . }}
+        {{ end }}
+      </div>
+
+      <div style="margin-top:0.9rem"><a class="btn" href="{{ (.Site.GetPage "section" "publications").RelPermalink }}">All publications</a></div>
+    {{ end }}
+  </section>
+{{ end }}

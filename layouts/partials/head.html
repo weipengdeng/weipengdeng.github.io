@@ -1,0 +1,60 @@
+{{- $title := .Site.Title -}}
+{{- if not .IsHome -}}
+  {{- $title = printf "%s · %s" .Title .Site.Title -}}
+{{- end -}}
+
+{{- $description := "" -}}
+{{- with .Description -}}
+  {{- $description = . -}}
+{{- else -}}
+  {{- with .Site.Params.description -}}
+    {{- $description = . -}}
+  {{- end -}}
+{{- end -}}
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="color-scheme" content="light dark" />
+<title>{{ $title }}</title>
+{{ if $description }}<meta name="description" content="{{ $description }}" />{{ end }}
+<link rel="canonical" href="{{ .Permalink }}" />
+
+{{/* Theme init: avoid flash */}}
+<script>
+  (function () {
+    try {
+      var stored = localStorage.getItem("theme");
+      var prefersDark =
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches;
+      var theme =
+        stored === "light" || stored === "dark"
+          ? stored
+          : prefersDark
+            ? "dark"
+            : "light";
+      document.documentElement.dataset.theme = theme;
+    } catch (e) {}
+  })();
+</script>
+
+{{ $css := resources.Get "css/main.css" | minify | fingerprint }}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" />
+
+{{ template "_internal/opengraph.html" . }}
+{{ template "_internal/twitter_cards.html" . }}
+{{ template "_internal/schema.html" . }}
+
+{{/* If a page bundle has a thumbnail, add explicit OG/Twitter image tags. */}}
+{{ $og := .Resources.GetMatch "*thumbnail*" }}
+{{ if not $og }}
+  {{ $matches := resources.Match "images/og-default.png" }}
+  {{ if gt (len $matches) 0 }}
+    {{ $og = index $matches 0 }}
+  {{ end }}
+{{ end }}
+{{ if $og }}
+  {{ $ogImg := $og.Fit "1200x630 webp q80" }}
+  <meta property="og:image" content="{{ $ogImg.Permalink }}" />
+  <meta name="twitter:image" content="{{ $ogImg.Permalink }}" />
+{{ end }}

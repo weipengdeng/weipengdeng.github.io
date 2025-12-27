@@ -1,0 +1,15 @@
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      © {{ now.Year }} {{ .Site.Params.author | default .Site.Title }} · Built with Hugo ·
+      <a href="{{ "index.xml" | relURL }}">RSS</a>
+    </div>
+
+    {{ if and .Site.Params.analytics.clustrmaps.enabled .Site.Params.analytics.clustrmaps.embed }}
+      <div>
+        {{ .Site.Params.analytics.clustrmaps.embed | safeHTML }}
+      </div>
+    {{ end }}
+  </div>
+</footer>
+

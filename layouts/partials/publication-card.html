@@ -1,0 +1,50 @@
+{{ $page := . }}
+{{ $authors := "" }}
+{{ with $page.Params.authors }}{{ $authors = delimit . ", " }}{{ end }}
+{{ $venue := $page.Params.venue }}
+{{ $year := $page.Params.year }}
+{{ $links := $page.Params.links }}
+
+{{ $tags := slice }}
+{{ with $page.Params.tags }}
+  {{ range . }}{{ $tags = $tags | append . }}{{ end }}
+{{ end }}
+
+<div class="pub-card" data-pub-tags="{{ delimit $tags "," }}">
+  {{ $thumb := $page.Resources.GetMatch "*thumbnail*" }}
+  {{ if not $thumb }}
+    {{ $matches := resources.Match "images/placeholder-thumb.png" }}
+    {{ if gt (len $matches) 0 }}
+      {{ $thumb = index $matches 0 }}
+    {{ end }}
+  {{ end }}
+  {{ if $thumb }}
+    {{ $img := $thumb.Fit "520x368 webp q80" }}
+    <a href="{{ $page.RelPermalink }}" style="text-decoration:none">
+      <img class="pub-thumb" src="{{ $img.RelPermalink }}" alt="" loading="lazy" decoding="async" />
+    </a>
+  {{ else }}
+    <a class="pub-thumb" href="{{ $page.RelPermalink }}" aria-label="Open publication">PDF</a>
+  {{ end }}
+
+  <div>
+    <p class="pub-title"><a href="{{ $page.RelPermalink }}">{{ $page.Title }}</a></p>
+    {{ if $authors }}<p class="pub-authors">{{ $authors }}</p>{{ end }}
+    {{ if $venue }}<p class="pub-venue">{{ $venue }}{{ with $year }} · {{ . }}{{ end }}</p>{{ end }}
+    {{ if $tags }}
+      <div class="hero__affiliations" style="margin-top:0.5rem">
+        {{ range $tags }}
+          <span class="chip">{{ . }}</span>
+        {{ end }}
+      </div>
+    {{ end }}
+
+    {{ if $links }}
+      <div class="pub-actions">
+        {{ with $links.pdf }}<a class="btn" href="{{ . }}" target="_blank" rel="noopener">PDF</a>{{ end }}
+        {{ with $links.code }}<a class="btn" href="{{ . }}" target="_blank" rel="noopener">Code</a>{{ end }}
+        {{ with $links.project }}<a class="btn" href="{{ . }}" target="_blank" rel="noopener">Project</a>{{ end }}
+      </div>
+    {{ end }}
+  </div>
+</div>

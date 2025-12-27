@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="{{ .Site.Language.Lang | default "en" }}">
+  <head>
+    {{ partial "head.html" . }}
+  </head>
+  <body>
+    {{ partial "header.html" . }}
+    <main class="container">
+      {{ block "main" . }}{{ end }}
+    </main>
+    {{ partial "footer.html" . }}
+
+    {{ $themeJs := resources.Get "js/theme.js" | minify | fingerprint }}
+    <script defer src="{{ $themeJs.RelPermalink }}" integrity="{{ $themeJs.Data.Integrity }}"></script>
+
+    {{ if or .IsHome (and (eq .Section "publications") (eq .Kind "section")) }}
+      {{ $pubJs := resources.Get "js/publications-filter.js" | minify | fingerprint }}
+      <script defer src="{{ $pubJs.RelPermalink }}" integrity="{{ $pubJs.Data.Integrity }}"></script>
+    {{ end }}
+  </body>
+</html>
+

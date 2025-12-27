@@ -1,0 +1,42 @@
+{{ $page := . }}
+{{ $links := $page.Params.links }}
+{{ $tags := $page.Params.tags | default (slice) }}
+
+<div class="pub-card">
+  {{ $thumb := $page.Resources.GetMatch "*thumbnail*" }}
+  {{ if not $thumb }}
+    {{ $matches := resources.Match "images/placeholder-thumb.png" }}
+    {{ if gt (len $matches) 0 }}
+      {{ $thumb = index $matches 0 }}
+    {{ end }}
+  {{ end }}
+  {{ if $thumb }}
+    {{ $img := $thumb.Fit "520x368 webp q80" }}
+    <a href="{{ $page.RelPermalink }}" style="text-decoration:none">
+      <img class="pub-thumb" src="{{ $img.RelPermalink }}" alt="" loading="lazy" decoding="async" />
+    </a>
+  {{ else }}
+    <a class="pub-thumb" href="{{ $page.RelPermalink }}" aria-label="Open project">PRJ</a>
+  {{ end }}
+
+  <div>
+    <p class="pub-title"><a href="{{ $page.RelPermalink }}">{{ $page.Title }}</a></p>
+    {{ with $page.Description }}<p class="pub-venue">{{ . }}</p>{{ end }}
+
+    {{ if $tags }}
+      <div class="hero__affiliations" style="margin-top:0.5rem">
+        {{ range $tags }}
+          <span class="chip">{{ . }}</span>
+        {{ end }}
+      </div>
+    {{ end }}
+
+    {{ if $links }}
+      <div class="pub-actions">
+        {{ with $links.demo }}<a class="btn" href="{{ . }}" target="_blank" rel="noopener">Demo</a>{{ end }}
+        {{ with $links.code }}<a class="btn" href="{{ . }}" target="_blank" rel="noopener">Code</a>{{ end }}
+        {{ with $links.paper }}<a class="btn" href="{{ . }}" target="_blank" rel="noopener">Paper</a>{{ end }}
+      </div>
+    {{ end }}
+  </div>
+</div>

@@ -1,0 +1,14 @@
+{{ define "main" }}
+  <article class="section">
+    <h2 style="margin:0 0 0.4rem">{{ .Title }}</h2>
+    {{ with .Params.tags }}
+      <div class="hero__affiliations" style="margin:0.4rem 0 0.9rem">
+        {{ range . }}
+          <span class="chip">{{ . }}</span>
+        {{ end }}
+      </div>
+    {{ end }}
+    <div class="prose">{{ .Content }}</div>
+  </article>
+{{ end }}
+
