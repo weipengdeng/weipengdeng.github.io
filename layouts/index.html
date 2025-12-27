@@ -4,7 +4,7 @@
     <div class="avatar">
       {{ $headshotPath := "" }}
       {{ if $p }}{{ $headshotPath = $p.headshot }}{{ end }}
-      {{ $headshotRes := nil }}
+      {{ $headshotRes := "" }}
       {{ with $headshotPath }}
         {{ $matches := resources.Match . }}
         {{ if gt (len $matches) 0 }}
@@ -58,7 +58,7 @@
         {{ range $edu := .Params.education }}
           <div class="item">
             <div class="logo">
-              {{ $logoRes := nil }}
+              {{ $logoRes := "" }}
               {{ with $edu.logo }}
                 {{ $matches := resources.Match . }}
                 {{ if gt (len $matches) 0 }}
@@ -84,7 +84,7 @@
         {{ range $exp := .Params.experience }}
           <div class="item">
             <div class="logo">
-              {{ $logoRes := nil }}
+              {{ $logoRes := "" }}
               {{ with $exp.logo }}
                 {{ $matches := resources.Match . }}
                 {{ if gt (len $matches) 0 }}
