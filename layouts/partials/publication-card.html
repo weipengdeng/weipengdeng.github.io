@@ -4,6 +4,7 @@
 {{ $venue := $page.Params.venue }}
 {{ $year := $page.Params.year }}
 {{ $links := $page.Params.links }}
+{{ $desc := $page.Params.description }}
 
 {{ $tags := slice }}
 {{ with $page.Params.tags }}
@@ -20,8 +21,8 @@
   {{ end }}
   {{ if $thumb }}
     {{ $img := $thumb.Fit "520x368 webp q80" }}
-    <a href="{{ $page.RelPermalink }}" style="text-decoration:none">
-      <img class="pub-thumb" src="{{ $img.RelPermalink }}" alt="" loading="lazy" decoding="async" />
+    <a class="pub-thumb" href="{{ $page.RelPermalink }}" aria-label="Open publication">
+      <img src="{{ $img.RelPermalink }}" alt="" loading="lazy" decoding="async" />
     </a>
   {{ else }}
     <a class="pub-thumb" href="{{ $page.RelPermalink }}" aria-label="Open publication">PDF</a>
@@ -32,11 +33,15 @@
     {{ if $authors }}<p class="pub-authors">{{ $authors }}</p>{{ end }}
     {{ if $venue }}<p class="pub-venue">{{ $venue }}{{ with $year }} · {{ . }}{{ end }}</p>{{ end }}
     {{ if $tags }}
-      <div class="hero__affiliations" style="margin-top:0.5rem">
+      <div class="topic-row" aria-label="Publication tags">
         {{ range $tags }}
-          <span class="chip">{{ . }}</span>
+          {{ partial "topic-badge.html" . }}
         {{ end }}
       </div>
+    {{ end }}
+
+    {{ with $desc }}
+      <p class="pub-abstract">{{ . }}</p>
     {{ end }}
 
     {{ if $links }}

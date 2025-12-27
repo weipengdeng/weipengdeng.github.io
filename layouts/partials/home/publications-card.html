@@ -1,0 +1,42 @@
+{{ $pubAll := sort (where .Site.RegularPages "Section" "publications") "Date" "desc" }}
+{{ $limit := .Site.Params.home.publicationsLimit | default 6 }}
+{{ $pubs := first $limit $pubAll }}
+{{ $pubPage := .Site.GetPage "section" "publications" }}
+
+<section class="section">
+  <div class="section__header">
+    <h2 class="section__title">Selected Publications</h2>
+    {{ if $pubPage }}<a class="section__more" href="{{ $pubPage.RelPermalink }}">All</a>{{ end }}
+  </div>
+
+  {{ if not (len $pubAll) }}
+    <div class="item__meta">Add publication pages under <code>content/publications/</code> or generate them from <code>bibliography/publications.bib</code>.</div>
+  {{ else }}
+    {{ $tags := slice }}
+    {{ range $pubs }}
+      {{ range .Params.tags }}
+        {{ $tags = $tags | append . }}
+      {{ end }}
+    {{ end }}
+    {{ $tags = $tags | collections.Uniq | sort }}
+
+    {{ if gt (len $tags) 0 }}
+      <div class="pub-controls" role="toolbar" aria-label="Publication filters">
+        <button class="filter-btn" type="button" data-pub-filter="all" aria-pressed="true">
+          <span class="topic-badge" style="--topic-color:#888">All</span>
+        </button>
+        {{ range $tags }}
+          <button class="filter-btn" type="button" data-pub-filter="{{ . }}" aria-pressed="false">
+            {{ partial "topic-badge.html" . }}
+          </button>
+        {{ end }}
+      </div>
+    {{ end }}
+
+    <div class="pub-list">
+      {{ range $pubs }}
+        {{ partial "publication-card.html" . }}
+      {{ end }}
+    </div>
+  {{ end }}
+</section>

@@ -1,0 +1,31 @@
+{{ $newsAll := sort (where .Site.RegularPages "Section" "news") "Date" "desc" }}
+{{ $limit := .Site.Params.home.newsLimit | default 12 }}
+{{ $news := first $limit $newsAll }}
+{{ $newsPage := .Site.GetPage "section" "news" }}
+
+<section class="section">
+  <div class="section__header">
+    <h2 class="section__title">News</h2>
+    {{ if $newsPage }}<a class="section__more" href="{{ $newsPage.RelPermalink }}">All</a>{{ end }}
+  </div>
+
+  {{ if not (len $news) }}
+    <div class="item__meta">Add dated Markdown files under <code>content/news/</code>.</div>
+  {{ else }}
+    <div class="news-scroll" role="list">
+      {{ range $group := $news.GroupByDate "2006" }}
+        <div class="news-year" role="listitem">
+          <div class="news-year__key">{{ $group.Key }}</div>
+          <div class="news-year__items">
+            {{ range $item := $group.Pages }}
+              <div class="news-line">
+                <a class="news-line__title" href="{{ $item.RelPermalink }}">{{ $item.Title }}</a>
+                <span class="news-line__date">{{ $item.Date.Format "Jan 02" }}</span>
+              </div>
+            {{ end }}
+          </div>
+        </div>
+      {{ end }}
+    </div>
+  {{ end }}
+</section>

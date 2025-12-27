@@ -1,0 +1,16 @@
+{{- $tag := . -}}
+{{- $label := $tag -}}
+{{- $color := "" -}}
+
+{{- with index site.Data.topics $tag -}}
+  {{- with .label -}}{{- $label = . -}}{{- end -}}
+  {{- with .color -}}{{- $color = . -}}{{- end -}}
+{{- end -}}
+
+{{- if not $color -}}
+  {{- $hash := md5 (printf "%v" $tag) -}}
+  {{- $color = printf "#%s" (substr $hash 0 6) -}}
+{{- end -}}
+
+<span class="topic-badge" style="--topic-color: {{ $color }}">{{ $label }}</span>
+

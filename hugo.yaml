@@ -32,6 +32,10 @@ params:
   author: "Weipeng Deng"
   description: "Personal academic portfolio."
 
+  home:
+    newsLimit: 12
+    publicationsLimit: 6
+
   social:
     email: "you@example.com"
     github: "https://github.com/your-handle"
@@ -47,4 +51,3 @@ params:
 markup:
   highlight:
     noClasses: true
-

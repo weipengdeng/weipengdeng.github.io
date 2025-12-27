@@ -8,9 +8,9 @@
       <div class="item__meta">{{ . }}{{ with $.Params.year }} · {{ . }}{{ end }}</div>
     {{ end }}
     {{ with .Params.tags }}
-      <div class="hero__affiliations" style="margin:0.75rem 0 0.85rem">
+      <div class="topic-row" style="margin:0.75rem 0 0.85rem" aria-label="Publication tags">
         {{ range . }}
-          <span class="chip">{{ . }}</span>
+          {{ partial "topic-badge.html" . }}
         {{ end }}
       </div>
     {{ end }}
@@ -27,4 +27,3 @@
     <div class="prose">{{ .Content }}</div>
   </article>
 {{ end }}
-

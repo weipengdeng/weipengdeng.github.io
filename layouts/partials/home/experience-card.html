@@ -1,0 +1,98 @@
+<section class="section">
+  <div class="section__header">
+    <h2 class="section__title">Experience</h2>
+  </div>
+
+  <div class="experience-grid">
+    <div class="experience-block">
+      <h3 class="experience-block__title">Education</h3>
+      {{ $items := .Params.education | default (slice) }}
+      {{ if not (len $items) }}
+        <div class="item__meta">Add entries to <code>education:</code> in <code>content/_index.md</code>.</div>
+      {{ else }}
+        <ul class="mini-list">
+          {{ range $edu := $items }}
+            <li class="mini-item">
+              <div class="mini-logo">
+                {{ $logoRes := "" }}
+                {{ with $edu.logo }}
+                  {{ $matches := resources.Match . }}
+                  {{ if gt (len $matches) 0 }}{{ $logoRes = index $matches 0 }}{{ end }}
+                {{ end }}
+                {{ if $logoRes }}
+                  {{ $logoImg := $logoRes.Fit "44x44 webp q80" }}
+                  <img src="{{ $logoImg.RelPermalink }}" alt="{{ $edu.institution }} logo" loading="lazy" decoding="async" />
+                {{ else }}
+                  {{ $edu.short | default "ED" }}
+                {{ end }}
+              </div>
+              <div>
+                <div class="mini-item__title">{{ $edu.institution }}</div>
+                <div class="mini-item__meta">
+                  <span>{{ $edu.degree }}</span>
+                  {{ with $edu.dates }}<span class="mini-item__date">{{ . }}</span>{{ end }}
+                </div>
+              </div>
+            </li>
+          {{ end }}
+        </ul>
+      {{ end }}
+    </div>
+
+    <div class="experience-block">
+      <h3 class="experience-block__title">Work</h3>
+      {{ $items := .Params.experience | default (slice) }}
+      {{ if not (len $items) }}
+        <div class="item__meta">Add entries to <code>experience:</code> in <code>content/_index.md</code>.</div>
+      {{ else }}
+        <ul class="mini-list">
+          {{ range $exp := $items }}
+            <li class="mini-item">
+              <div class="mini-logo">
+                {{ $logoRes := "" }}
+                {{ with $exp.logo }}
+                  {{ $matches := resources.Match . }}
+                  {{ if gt (len $matches) 0 }}{{ $logoRes = index $matches 0 }}{{ end }}
+                {{ end }}
+                {{ if $logoRes }}
+                  {{ $logoImg := $logoRes.Fit "44x44 webp q80" }}
+                  <img src="{{ $logoImg.RelPermalink }}" alt="{{ $exp.org }} logo" loading="lazy" decoding="async" />
+                {{ else }}
+                  {{ $exp.short | default "XP" }}
+                {{ end }}
+              </div>
+              <div>
+                <div class="mini-item__title">{{ $exp.org }}</div>
+                <div class="mini-item__meta">
+                  <span>{{ $exp.title }}</span>
+                  {{ with $exp.dates }}<span class="mini-item__date">{{ . }}</span>{{ end }}
+                </div>
+              </div>
+            </li>
+          {{ end }}
+        </ul>
+      {{ end }}
+    </div>
+
+    <div class="experience-block experience-block--wide">
+      <h3 class="experience-block__title">Honors &amp; Awards</h3>
+      {{ $items := .Params.awards | default (slice) }}
+      {{ if not (len $items) }}
+        <div class="item__meta">Add entries to <code>awards:</code> in <code>content/_index.md</code>.</div>
+      {{ else }}
+        <ul class="award-list">
+          {{ range $a := $items }}
+            <li class="award-item">
+              <span class="award-item__title">{{ $a.title }}</span>
+              <span class="award-item__meta">
+                {{ $a.org }}{{ with $a.year }} · {{ . }}{{ end }}
+                {{ with $a.level }}<span class="badge">{{ . }}</span>{{ end }}
+              </span>
+            </li>
+          {{ end }}
+        </ul>
+      {{ end }}
+    </div>
+  </div>
+</section>
+

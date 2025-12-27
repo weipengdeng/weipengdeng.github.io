@@ -16,9 +16,13 @@
       {{ $tags = $tags | collections.Uniq | sort }}
 
       <div class="pub-controls" role="toolbar" aria-label="Publication filters">
-        <button class="filter-btn" type="button" data-pub-filter="all" aria-pressed="true">All</button>
+        <button class="filter-btn" type="button" data-pub-filter="all" aria-pressed="true">
+          <span class="topic-badge" style="--topic-color:#888">All</span>
+        </button>
         {{ range $tags }}
-          <button class="filter-btn" type="button" data-pub-filter="{{ . }}" aria-pressed="false">{{ . }}</button>
+          <button class="filter-btn" type="button" data-pub-filter="{{ . }}" aria-pressed="false">
+            {{ partial "topic-badge.html" . }}
+          </button>
         {{ end }}
       </div>
 
@@ -30,4 +34,3 @@
     {{ end }}
   </section>
 {{ end }}
-

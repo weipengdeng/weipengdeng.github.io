@@ -301,7 +301,7 @@ def main(argv: Optional[List[str]] = None) -> int:
     parser = argparse.ArgumentParser(
         description="Generate Hugo publication bundles from a BibTeX file."
     )
-    parser.add_argument("--bib", default="data/publications.bib")
+    parser.add_argument("--bib", default="bibliography/publications.bib")
     parser.add_argument("--out", default="content/publications")
     parser.add_argument(
         "--clean-generated",
@@ -351,4 +351,3 @@ def main(argv: Optional[List[str]] = None) -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

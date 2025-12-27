@@ -8,3 +8,7 @@ Desktop.ini
 .DS_Store
 .vscode/
 
+# Local tooling / references
+/.tmp-hugo/
+/hugo_tmp.zip
+/yihongt.github.io-main/

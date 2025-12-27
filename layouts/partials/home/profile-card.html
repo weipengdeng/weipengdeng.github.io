@@ -1,0 +1,86 @@
+{{ $p := .Params.profile | default dict }}
+{{ $name := $p.name | default .Site.Title }}
+
+{{ $headshotRes := "" }}
+{{ with $p.headshot }}
+  {{ $matches := resources.Match . }}
+  {{ if gt (len $matches) 0 }}
+    {{ $headshotRes = index $matches 0 }}
+  {{ end }}
+{{ end }}
+
+{{ $portrait := "" }}
+{{ if $headshotRes }}
+  {{ $portrait = $headshotRes.Fit "560x560 webp q85" }}
+{{ end }}
+
+<section class="section profile-card">
+  <div class="profile-card__grid">
+    <div>
+      <div class="profile-card__name-row">
+        <h1 class="profile-card__name">{{ $name }}</h1>
+        {{ if $portrait }}
+          <img class="profile-card__avatar-sm" src="{{ $portrait.RelPermalink }}" width="48" height="48" alt="{{ $name }}" loading="lazy" decoding="async" />
+        {{ end }}
+      </div>
+
+      <div class="profile-card__positions">
+        {{ with $p.positions }}
+          {{ range . }}
+            <div class="position-line">
+              {{ $logoRes := "" }}
+              {{ with .logo }}
+                {{ $matches := resources.Match . }}
+                {{ if gt (len $matches) 0 }}{{ $logoRes = index $matches 0 }}{{ end }}
+              {{ end }}
+              {{ if $logoRes }}
+                {{ $logoImg := $logoRes.Fit "48x48 webp q80" }}
+                <img class="position-line__logo" src="{{ $logoImg.RelPermalink }}" alt="" loading="lazy" decoding="async" />
+              {{ end }}
+              <span>{{ .name }}</span>
+            </div>
+          {{ end }}
+        {{ else }}
+          {{ with $p.role }}<div class="position-line">{{ . }}</div>{{ end }}
+        {{ end }}
+      </div>
+
+      {{ with $p.affiliations }}
+        <div class="profile-card__chips">
+          {{ range . }}
+            <span class="chip">{{ . }}</span>
+          {{ end }}
+        </div>
+      {{ end }}
+
+      <div class="profile-card__bio">
+        {{ if $p.bio }}
+          {{ $p.bio | markdownify }}
+        {{ else }}
+          {{ .Content }}
+        {{ end }}
+      </div>
+
+      <div class="profile-card__meta-links">
+        {{ $cvUrl := $p.cv }}
+        {{ if not $cvUrl }}
+          {{ with .Site.GetPage "/cv" }}{{ $cvUrl = .RelPermalink }}{{ end }}
+        {{ end }}
+        {{ if $cvUrl }}
+          <a class="inline-link" href="{{ $cvUrl }}">Curriculum Vitae</a>
+        {{ end }}
+      </div>
+
+      {{ partial "contact-links.html" . }}
+    </div>
+
+    <div class="profile-card__portrait">
+      {{ if $portrait }}
+        <img src="{{ $portrait.RelPermalink }}" width="280" height="280" alt="{{ $name }}" loading="eager" decoding="async" />
+      {{ else }}
+        <div class="avatar__fallback">{{ (substr (.Site.Title | default "A") 0 1) }}</div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+

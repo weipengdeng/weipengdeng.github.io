@@ -34,7 +34,7 @@ jobs:
           extended: true
 
       - name: Generate publications from BibTeX
-        run: python3 scripts/generate_publications.py --bib data/publications.bib --out content/publications --clean-generated
+        run: python3 scripts/generate_publications.py --bib bibliography/publications.bib --out content/publications --clean-generated
 
       - name: Build
         run: hugo --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
@@ -54,4 +54,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
