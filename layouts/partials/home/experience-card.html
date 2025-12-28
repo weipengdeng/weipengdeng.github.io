@@ -7,32 +7,34 @@
         {{ if not (len $items) }}
           <div class="item__meta">Add entries to <code>education:</code> in <code>content/_index.md</code>.</div>
         {{ else }}
-          <ul class="mini-list">
-            {{ range $edu := $items }}
-              <li class="mini-item">
-                <div class="mini-logo">
-                  {{ $logoRes := "" }}
-                  {{ with $edu.logo }}
-                    {{ $matches := resources.Match . }}
-                    {{ if gt (len $matches) 0 }}{{ $logoRes = index $matches 0 }}{{ end }}
-                  {{ end }}
-                  {{ if $logoRes }}
-                    {{ $logoImg := $logoRes.Fit "44x44 webp q80" }}
-                    <img src="{{ $logoImg.RelPermalink }}" alt="{{ $edu.institution }} logo" loading="lazy" decoding="async" />
-                  {{ else }}
-                    {{ $edu.short | default "ED" }}
-                  {{ end }}
-                </div>
-                <div>
-                  <div class="mini-item__title">{{ $edu.institution }}</div>
-                  <div class="mini-item__meta">
-                    <span>{{ $edu.degree }}</span>
-                    {{ with $edu.dates }}<span class="mini-item__date">{{ . }}</span>{{ end }}
+          <div class="scroll-panel">
+            <ul class="mini-list">
+              {{ range $edu := $items }}
+                <li class="mini-item">
+                  <div class="mini-logo">
+                    {{ $logoRes := "" }}
+                    {{ with $edu.logo }}
+                      {{ $matches := resources.Match . }}
+                      {{ if gt (len $matches) 0 }}{{ $logoRes = index $matches 0 }}{{ end }}
+                    {{ end }}
+                    {{ if $logoRes }}
+                      {{ $logoImg := $logoRes.Fit "44x44 webp q80" }}
+                      <img src="{{ $logoImg.RelPermalink }}" alt="{{ $edu.institution }} logo" loading="lazy" decoding="async" />
+                    {{ else }}
+                      {{ $edu.short | default "ED" }}
+                    {{ end }}
                   </div>
-                </div>
-              </li>
-            {{ end }}
-          </ul>
+                  <div>
+                    <div class="mini-item__title">{{ $edu.institution }}</div>
+                    <div class="mini-item__meta">
+                      <span>{{ $edu.degree }}</span>
+                      {{ with $edu.dates }}<span class="mini-item__date">{{ . }}</span>{{ end }}
+                    </div>
+                  </div>
+                </li>
+              {{ end }}
+            </ul>
+          </div>
         {{ end }}
       </div>
 
@@ -42,17 +44,28 @@
         {{ if not (len $items) }}
           <div class="item__meta">Add entries to <code>awards:</code> in <code>content/_index.md</code>.</div>
         {{ else }}
-          <ul class="award-list">
-            {{ range $a := $items }}
-              <li class="award-item">
-                <span class="award-item__title">{{ $a.title }}</span>
-                <span class="award-item__meta">
-                  {{ $a.org }}{{ with $a.year }} · {{ . }}{{ end }}
-                  {{ with $a.level }}<span class="badge">{{ . }}</span>{{ end }}
-                </span>
-              </li>
-            {{ end }}
-          </ul>
+          <div class="scroll-panel">
+            <ul class="award-list">
+              {{ range $a := $items }}
+                <li class="award-item">
+                  <span class="award-item__title">{{ $a.title }}</span>
+                  <span class="award-item__meta">
+                    {{ $a.org }}{{ with $a.year }} · {{ . }}{{ end }}
+                    {{ with $a.level }}
+                      {{ $lvl := lower (printf "%v" .) }}
+                      {{ $variant := "" }}
+                      {{ if eq $lvl "silver" }}
+                        {{ $variant = "badge--silver" }}
+                      {{ else if or (eq $lvl "gold") (eq $lvl "distinction") }}
+                        {{ $variant = "badge--gold" }}
+                      {{ end }}
+                      <span class="badge{{ if $variant }} {{ $variant }}{{ end }}">{{ . }}</span>
+                    {{ end }}
+                  </span>
+                </li>
+              {{ end }}
+            </ul>
+          </div>
         {{ end }}
       </div>
 
@@ -84,38 +97,76 @@
     </div>
 
     <div class="experience-block">
-      <h3 class="experience-block__title">Experience</h3>
-      {{ $items := .Params.experience | default (slice) }}
-      {{ if not (len $items) }}
-        <div class="item__meta">Add entries to <code>experience:</code> in <code>content/_index.md</code>.</div>
-      {{ else }}
-        <ul class="mini-list">
-          {{ range $exp := $items }}
-            <li class="mini-item">
-              <div class="mini-logo">
-                {{ $logoRes := "" }}
-                {{ with $exp.logo }}
-                  {{ $matches := resources.Match . }}
-                  {{ if gt (len $matches) 0 }}{{ $logoRes = index $matches 0 }}{{ end }}
-                {{ end }}
-                {{ if $logoRes }}
-                  {{ $logoImg := $logoRes.Fit "44x44 webp q80" }}
-                  <img src="{{ $logoImg.RelPermalink }}" alt="{{ $exp.org }} logo" loading="lazy" decoding="async" />
-                {{ else }}
-                  {{ $exp.short | default "XP" }}
-                {{ end }}
-              </div>
-              <div>
-                <div class="mini-item__title">{{ $exp.org }}</div>
-                <div class="mini-item__meta">
-                  <span>{{ $exp.title }}</span>
-                  {{ with $exp.dates }}<span class="mini-item__date">{{ . }}</span>{{ end }}
-                </div>
-              </div>
-            </li>
-          {{ end }}
-        </ul>
-      {{ end }}
+      <div class="experience-subsection">
+        <h3 class="experience-block__title">Experience</h3>
+        {{ $items := .Params.experience | default (slice) }}
+        {{ if not (len $items) }}
+          <div class="item__meta">Add entries to <code>experience:</code> in <code>content/_index.md</code>.</div>
+        {{ else }}
+          <div class="scroll-panel">
+            <ul class="mini-list">
+              {{ range $exp := $items }}
+                <li class="mini-item">
+                  <div class="mini-logo">
+                    {{ $logoRes := "" }}
+                    {{ with $exp.logo }}
+                      {{ $matches := resources.Match . }}
+                      {{ if gt (len $matches) 0 }}{{ $logoRes = index $matches 0 }}{{ end }}
+                    {{ end }}
+                    {{ if $logoRes }}
+                      {{ $logoImg := $logoRes.Fit "44x44 webp q80" }}
+                      <img src="{{ $logoImg.RelPermalink }}" alt="{{ $exp.org }} logo" loading="lazy" decoding="async" />
+                    {{ else }}
+                      {{ $exp.short | default "XP" }}
+                    {{ end }}
+                  </div>
+                  <div>
+                    <div class="mini-item__title">{{ $exp.org }}</div>
+                    <div class="mini-item__meta">
+                      <span>{{ $exp.title }}</span>
+                      {{ with $exp.dates }}<span class="mini-item__date">{{ . }}</span>{{ end }}
+                    </div>
+                  </div>
+                </li>
+              {{ end }}
+            </ul>
+          </div>
+        {{ end }}
+      </div>
+
+      <div class="experience-subsection">
+        <h3 class="experience-block__title">Projects</h3>
+        {{ $projects := sort (where .Site.RegularPages "Section" "projects") "Date" "desc" }}
+        {{ if not (len $projects) }}
+          <div class="item__meta">Add project pages under <code>content/projects/</code>.</div>
+        {{ else }}
+          <div class="scroll-panel">
+            <ul class="project-list">
+              {{ range $p := $projects }}
+                <li class="project-item">
+                  <div class="project-item__title"><a href="{{ $p.RelPermalink }}">{{ $p.Title }}</a></div>
+                  <div class="project-item__meta">
+                    {{ $parts := slice }}
+                    {{ with $p.Params.role }}{{ $parts = $parts | append (printf "Role: %v" .) }}{{ end }}
+                    {{ with $p.Params.period }}{{ $parts = $parts | append (printf "Period: %v" .) }}{{ end }}
+                    {{ with $p.Params.funding }}
+                      {{ if reflect.IsSlice . }}
+                        {{ $parts = $parts | append (printf "Funding: %s" (delimit . ", ")) }}
+                      {{ else }}
+                        {{ $parts = $parts | append (printf "Funding: %v" .) }}
+                      {{ end }}
+                    {{ end }}
+                    {{ if not (len $parts) }}
+                      {{ $parts = $parts | append ($p.Date | time.Format "Jan 2006") }}
+                    {{ end }}
+                    {{ delimit $parts " · " }}
+                  </div>
+                </li>
+              {{ end }}
+            </ul>
+          </div>
+        {{ end }}
+      </div>
     </div>
   </div>
 </section>

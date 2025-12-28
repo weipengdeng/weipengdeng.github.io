@@ -544,6 +544,36 @@ a:hover {
   border-top: 1px solid var(--border);
 }
 
+.scroll-panel {
+  max-height: 13.75rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-right: 0.25rem;
+  scrollbar-gutter: stable;
+  scrollbar-color: transparent transparent;
+}
+
+.experience-subsection:hover .scroll-panel,
+.experience-subsection:focus-within .scroll-panel {
+  scrollbar-color: color-mix(in srgb, var(--muted) 45%, transparent) transparent;
+}
+
+.scroll-panel::-webkit-scrollbar {
+  width: 10px;
+}
+
+.scroll-panel::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 999px;
+  border: 3px solid transparent;
+  background-clip: padding-box;
+}
+
+.experience-subsection:hover .scroll-panel::-webkit-scrollbar-thumb,
+.experience-subsection:focus-within .scroll-panel::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--muted) 35%, transparent);
+}
+
 .service-list {
   display: grid;
   gap: 0.65rem;
@@ -645,6 +675,28 @@ a:hover {
   align-items: center;
   gap: 0.45rem;
   flex-wrap: wrap;
+}
+
+.project-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.project-item {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.project-item__title {
+  font-weight: 750;
+}
+
+.project-item__meta {
+  color: var(--muted);
+  font-size: 0.93rem;
 }
 
 .topic-dot {
@@ -765,13 +817,32 @@ a:hover {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  padding: 0.22rem 0.5rem;
+  padding: 0.16rem 0.46rem;
   border-radius: 999px;
-  border: 1px solid var(--border);
-  background: color-mix(in srgb, var(--primary) 14%, transparent);
+  border: 1px solid transparent;
+  --badge-fill: color-mix(in srgb, var(--primary) 12%, var(--bg-elev));
+  --badge-border: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--primary) 70%, transparent),
+    color-mix(in srgb, var(--primary) 32%, transparent)
+  );
+  background:
+    linear-gradient(var(--badge-fill), var(--badge-fill)) padding-box,
+    var(--badge-border) border-box;
   color: var(--text);
   font-weight: 700;
-  font-size: 0.85rem;
+  font-size: 0.78rem;
+  line-height: 1.2;
+}
+
+.badge--gold {
+  --badge-fill: color-mix(in srgb, #f59e0b 12%, var(--bg-elev));
+  --badge-border: linear-gradient(135deg, #f59e0b, #fde047 55%, #f59e0b);
+}
+
+.badge--silver {
+  --badge-fill: color-mix(in srgb, #94a3b8 14%, var(--bg-elev));
+  --badge-border: linear-gradient(135deg, #64748b, #cbd5e1 55%, #64748b);
 }
 
 .pub-controls {
@@ -843,7 +914,8 @@ a:hover {
 }
 
 .pub-hero {
-  margin: 0 0 1rem;
+  margin: 1.25rem auto 0;
+  max-width: 640px;
   border-radius: 16px;
   border: 1px solid var(--border);
   background: var(--bg-elev);
