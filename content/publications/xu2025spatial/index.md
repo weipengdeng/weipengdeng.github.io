@@ -1,11 +1,26 @@
 ---
 title: "Spatial eco-socio-economic trade-offs inform differentiated management strategies in mega-urban agglomerations"
 date: 2025-07-01
-description: "Analysis on spatial clustering and production frontiers to quantify trade-offs between ecosystem services and socio-economic well-being."
-year: 2025
-bibtex_key: "xu2025spatial"
-generated_from_bib: true
+description: "Analysis on GBA's spatial clustering and production frontiers to quantify trade-offs between ecosystem services and socio-economic well-being."
+
+authors:
+  - "Weipeng Deng"
+  - "Yihong Tang"
+  - "Chaofan Wang"
+  - "Tianren Yang"
+
+Journal: "npj Urban Sustainability"
+year: 2026
+
+tags:
+  - "Sustainable Built Environments"
+
+links:
+  pdf: "https://www.nature.com/articles/s42949-025-00231-x"
+  code: "https://github.com/Sealxuyh/PPF-GBA"
+  project: "https://weipengdeng.github.io/Sustainable Built Environments/"
 ---
+
 
 ## Citation
 
