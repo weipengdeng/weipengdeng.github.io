@@ -1,5 +1,5 @@
 ---
-title: "Example Project: Publication Gallery + BibTeX Workflow"
+title: "Project to be updated"
 date: 2025-02-01
 description: "A project entry with tags and links."
 
