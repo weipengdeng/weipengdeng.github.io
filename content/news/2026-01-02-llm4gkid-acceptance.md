@@ -1,6 +1,6 @@
 ---
 title: "Paper about LLM4GKID accepted by IEEE TCSS"
-date: 2026-01-02
+date: 2026-12-28
 ---
 
 I am pleased to announce that our latest paper, **"LLM4GKID: Identifying Ghost Kitchens through Large Language Models and Multi-source Data Integration,"** has been accepted for publication in **IEEE Transactions on Computational Social Systems (TCSS)**.
