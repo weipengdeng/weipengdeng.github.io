@@ -24,6 +24,14 @@
       </div>
     {{ end }}
 
+    {{ $thumb := .Resources.GetMatch "*thumbnail*" }}
+    {{ if $thumb }}
+      {{ $img := $thumb.Fit "1200x800 webp q85" }}
+      <figure class="pub-hero">
+        <img src="{{ $img.RelPermalink }}" alt="Thumbnail for {{ .Title }}" loading="eager" decoding="async" />
+      </figure>
+    {{ end }}
+
     <div class="prose">{{ .Content }}</div>
   </article>
 {{ end }}

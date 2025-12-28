@@ -842,6 +842,20 @@ a:hover {
   display: block;
 }
 
+.pub-hero {
+  margin: 0 0 1rem;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: var(--bg-elev);
+  overflow: hidden;
+}
+
+.pub-hero img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 .pub-title {
   margin: 0 0 0.15rem;
   font-weight: 800;
