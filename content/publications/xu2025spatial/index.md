@@ -4,10 +4,12 @@ date: 2025-07-01
 description: "Analysis on GBA's spatial clustering and production frontiers to quantify trade-offs between ecosystem services and socio-economic well-being."
 
 authors:
-  - "Weipeng Deng"
+  - "Yuhan Xu"
   - "Yihong Tang"
-  - "Chaofan Wang"
-  - "Tianren Yang"
+  - "Chen Chen"
+  - "Weipeng Deng"
+  - "Linli Dai"
+  - "Tianren Yang"  
 
 venue: "npj Urban Sustainability"
 year: 2025

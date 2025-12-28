@@ -7,9 +7,9 @@ profile:
   role: "PhD Candidate, HKU"
   # Put a headshot under `assets/images/` and reference its path here, e.g. `images/headshot.webp`.
   headshot: "images/headshot.jpg"
-  affiliations:
-    - "HKU"
-    - "NUS"
+  # affiliations:
+  #   - "HKU"
+  #   - "NUS"
   # Optional: use structured positions (renders as multiple lines with small logos).
   # positions:
   #   - name: "PhD Candidate, HKU"

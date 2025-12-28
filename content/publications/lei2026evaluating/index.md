@@ -1,7 +1,7 @@
 ---
 title: "Evaluating age-friendly public transportation: a novel smart card data approach analyzing travel time differences between older and younger travelers after controlling for confounding effects"
 date: 2025-12-15
-description: "A novel framework to evaluate age-friendliness in metro systems using travel time differences between older and younger adults as a proxy measure. "
+# description: "A novel framework to evaluate age-friendliness in metro systems using travel time differences between older and younger adults as a proxy measure. "
 
 authors:
   - "Shuyu Lei"
