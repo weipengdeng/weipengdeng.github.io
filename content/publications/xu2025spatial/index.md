@@ -10,7 +10,7 @@ authors:
   - "Tianren Yang"
 
 Journal: "npj Urban Sustainability"
-year: 2026
+year: 2025
 
 tags:
   - "Sustainable Built Environments"
