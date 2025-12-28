@@ -84,7 +84,12 @@ awards:
     level: "Merit"
 ---
 
-I am a PhD student studying how digital transformation reshapes everyday travel behavior and the built environment. My research acknowledges the complexity of urban functioning as an interconnected system, with particular attention to the interactions between adaptive commercial systems, equitable foodscapes, and sustainable built environments. I am especially interested in developing scalable, cost-effective, and reproducible analytical tools to support urban research and practice.
+I am a PhD student studying how digital transformation reshapes everyday travel behavior and the built environment. My research acknowledges the complexity of urban functioning as an interconnected system, and is organized around three pillars:
+
+- Adaptive Commercial Systems
+- Equitable Foodscapes
+- Sustainable Built Environments
+
+I am especially interested in developing scalable, cost-effective, and reproducible analytical tools to support urban research and practice.
 
 If you are interested in collaborating, feel free to reach out via the contact links.
-

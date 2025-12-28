@@ -1,20 +1,11 @@
-Multimodal:
-  label: "Multimodal"
-  color: "#8b5cf6"
-
-LLMs:
-  label: "LLMs"
+Adaptive Commercial Systems:
+  label: "Adaptive Commercial Systems"
   color: "#2563eb"
 
-Efficiency:
-  label: "Efficiency"
+Equitable Foodscapes:
+  label: "Equitable Foodscapes"
   color: "#10b981"
 
-Robustness:
-  label: "Robustness"
+Sustainable Built Environments:
+  label: "Sustainable Built Environments"
   color: "#f59e0b"
-
-Systems:
-  label: "Systems"
-  color: "#ef4444"
-

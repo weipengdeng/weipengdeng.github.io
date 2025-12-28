@@ -12,8 +12,8 @@ venue: "NeurIPS"
 year: 2025
 
 tags:
-  - "Multimodal"
-  - "LLMs"
+  - "Adaptive Commercial Systems"
+  - "Sustainable Built Environments"
 
 links:
   pdf: "https://arxiv.org/abs/0000.00000"
@@ -24,4 +24,3 @@ links:
 ## Abstract
 
 Write the abstract in Markdown. Add a `thumbnail.png` (or `thumbnail.webp`) next to this `index.md`.
-
