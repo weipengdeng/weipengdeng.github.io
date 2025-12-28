@@ -51,7 +51,7 @@ experience:
     dates: "2025 - 2027"
     summary: "Effiencient Utilisation of Stock Space"
     short: "DCE"
-    logo: "images/logos/hku_logo.png"
+    logo: "images/logos/csus_logo.png"
   - org: "School of Geography, SCNU"
     title: "External Supervisor"
     dates: "2024 - 2027"
@@ -67,7 +67,7 @@ experience:
 
 awards:
   - title: "Best Student Presentation Award"
-    org: "International Conference on Integrated Land-use Transport Modeling (ILUTM-9)"
+    org: "ILUTM-9"
     year: 2025
     level: "Silver"
   - title: "International Award for Planning Excellence"
@@ -79,17 +79,12 @@ awards:
     year: 2025
     level: "Gold"
   - title: "CSDI Award"
-    org: "Development Bearu of Hong Kong SAR Goverment"
+    org: "Development Bureau of Hong Kong SAR Goverment"
     year: 2023
     level: "Merit"
 ---
 
-I am a PhD student studying how digital transformation reshapes everyday travel behavior and the built environment. My research acknowledges the complexity of urban functioning as an interconnected system, and is organized around three pillars:
-
-- Adaptive Commercial Systems
-- Equitable Foodscapes
-- Sustainable Built Environments
-
-I am especially interested in developing scalable, cost-effective, and reproducible analytical tools to support urban research and practice.
+I am a PhD student studying how digital transformation reshapes everyday travel behavior and the built environment. My research acknowledges the complexity of urban functioning as an interconnected system, with particular attention to the interactions between adaptive commercial systems, equitable foodscapes, and sustainable built environments. I am especially interested in developing scalable, cost-effective, and reproducible analytical tools to support urban research and practice.
 
 If you are interested in collaborating, feel free to reach out via the contact links.
+
