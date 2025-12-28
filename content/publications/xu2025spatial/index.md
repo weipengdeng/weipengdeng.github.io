@@ -9,7 +9,7 @@ authors:
   - "Chaofan Wang"
   - "Tianren Yang"
 
-Journal: "npj Urban Sustainability"
+venue: "npj Urban Sustainability"
 year: 2025
 
 tags:
