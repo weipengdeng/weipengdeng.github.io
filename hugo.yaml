@@ -29,23 +29,23 @@ menu:
       weight: 60
 
 params:
-  author: "Weipeng Deng"
-  description: "Personal academic portfolio."
+  author: "Weipeng Deng (邓伟鹏)"
+  description: "Personal academic portfolio. (under construction)"
 
   home:
     newsLimit: 12
     publicationsLimit: 6
 
   social:
-    email: "you@example.com"
-    github: "https://github.com/your-handle"
-    scholar: ""
-    linkedin: ""
+    email: "wpdeng@connect.hku.hk"
+    github: "https://github.com/weipengdeng"
+    scholar: "https://scholar.google.com/citations?user=40r8hbIAAAAJ&hl=en&oi=ao"
+    linkedin: "https://cn.linkedin.com/in/weipengdeng"
     twitter: ""
 
   analytics:
     clustrmaps:
-      enabled: false
+      enabled: true
       embed: ""
 
 markup:

@@ -19,42 +19,77 @@ profile:
 
 education:
   - institution: "The University of Hong Kong"
-    degree: "PhD in Computer Science (example)"
-    dates: "2023 - Present"
+    degree: "PhD in Urban Planning & Design"
+    dates: "2022 - Present"
     short: "HKU"
-    logo: "images/logos/hku.png"
-  - institution: "..."
-    degree: "BEng in ... (example)"
-    dates: "2019 - 2023"
-    short: "UNI"
-    logo: "images/logos/uni.png"
+    logo: "images/logos/hku_logo.png"
+  - institution: "National University of Singapore"
+    degree: "Visiting PhD in Urban Analytics Lab"
+    dates: "2025 - Present"
+    short: "NUS"
+    logo: "images/logos/nus_logo.png"
+  - institution: "The University of Melbourne"
+    degree: "Master in Urban Planning"
+    dates: "2019 - 2021"
+    short: "UniMelb"
+    logo: "images/logos/unimelb_logo.png"
+  - institution: "South China Normal University"
+    degree: "Bsc in Human Geography and Urban-rural Planning"
+    dates: "2014 - 2018"
+    short: "UniMelb"
+    logo: "images/logos/scnu_logo.png"
 
 experience:
-  - org: "MIT CSAIL"
-    title: "Research Intern (example)"
-    dates: "2024"
-    summary: "Multimodal LLMs, evaluation, and efficiency."
-    short: "MIT"
-    logo: "images/logos/mit.png"
-  - org: "HKU"
-    title: "Research Assistant (example)"
-    dates: "2022 - 2023"
+  - org: "The University of Hong Kong"
+    title: "Senior Research Assistant"
+    dates: "2022 - present"
+    summary: "Consumption behavior modelling, urban foodscape analytics."
+    short: "HKU"
+    logo: "images/logos/hku_logo.png"
+  - org: "Chinese Society for Urban Studies"
+    title: "Decision Consulting Expert"
+    dates: "2025 - 2027"
+    summary: "Effiencient Utilisation of Stock Space"
+    short: "DCE"
+    logo: "images/logos/hku_logo.png"
+  - org: "School of Geography, SCNU"
+    title: "External Supervisor"
+    dates: "2024 - 2027"
+    summary: "Career and Research Mentor"
+    short: "EM"
+    logo: "images/logos/scnu_logo.png"
+  - org: "The University of Hong Kong"
+    title: "Research Assistant"
+    dates: "2021 - 2022"
     summary: "Vision-language pretraining."
     short: "RA"
-    logo: "images/logos/hku.png"
+    logo: "images/logos/hku_logo.png"
 
 awards:
-  - title: "Best Paper Award (example)"
-    org: "Conference"
+  - title: "Best Student Presentation Award"
+    org: "International Conference on Integrated Land-use Transport Modeling (ILUTM-9)"
+    year: 2025
+    level: "Silver"
+  - title: "International Award for Planning Excellence"
+    org: "Royal Town Planning Institute"
+    year: 2025
+    level: "Distinction"
+  - title: "Innovation Award"
+    org: " 50th International Exhibition of Inventions Geneva"
     year: 2025
     level: "Gold"
-  - title: "Scholarship (example)"
-    org: "Institution"
-    year: 2024
-    level: "Distinction"
+  - title: "CSDI Award"
+    org: "Development Bearu of Hong Kong SAR Goverment"
+    year: 2023
+    level: "Merit"
 ---
 
-I am a PhD student working on multimodal learning and large language models. I enjoy building fast, reproducible systems for research and open-source tooling.
+I am a PhD candidate focusing on data-driven research at the intersection of cities, people, and technology.
+
+My work is organized around three pillars:
+
+- Adaptive commercial systems
+- Equitable foodscapes
+- Sustainable built environments
 
 If you are interested in collaborating, feel free to reach out via the contact links.
-
