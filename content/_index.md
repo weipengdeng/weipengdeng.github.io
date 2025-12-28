@@ -4,12 +4,12 @@ description: "Minimalist academic portfolio."
 
 profile:
   name: "Weipeng Deng"
-  role: "PhD Candidate, HKU (edit this)"
+  role: "PhD Candidate, HKU"
   # Put a headshot under `assets/images/` and reference its path here, e.g. `images/headshot.webp`.
-  headshot: "images/headshot.png"
+  headshot: "images/headshot.jpg"
   affiliations:
-    - "MIT (example)"
-    - "HKU (example)"
+    - "HKU"
+    - "NUS"
   # Optional: use structured positions (renders as multiple lines with small logos).
   # positions:
   #   - name: "PhD Candidate, HKU"
@@ -84,12 +84,7 @@ awards:
     level: "Merit"
 ---
 
-I am a PhD candidate focusing on data-driven research at the intersection of cities, people, and technology.
-
-My work is organized around three pillars:
-
-- Adaptive commercial systems
-- Equitable foodscapes
-- Sustainable built environments
+I am a PhD student studying how digital transformation reshapes everyday travel behavior and the built environment. My research acknowledges the complexity of urban functioning as an interconnected system, with particular attention to the interactions between adaptive commercial systems, equitable foodscapes, and sustainable built environments. I am especially interested in developing scalable, cost-effective, and reproducible analytical tools to support urban research and practice.
 
 If you are interested in collaborating, feel free to reach out via the contact links.
+
