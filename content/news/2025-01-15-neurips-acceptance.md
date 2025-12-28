@@ -1,6 +1,6 @@
 ---
-title: "Paper accepted at NeurIPS 2025 (example)"
-date: 2025-01-15
+title: "Paper about LLM4GKID accepted by IEEE TCSS"
+date: 2025-12-26
 ---
 
 Short highlight goes here. Keep news entries concise and dated.

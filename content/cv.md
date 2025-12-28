@@ -1,6 +1,6 @@
 ---
-title: "CV"
-description: "Curriculum Vitae."
+  title: "CV"
+  description: "Curriculum Vitae."
 ---
 
 - Add a PDF at `static/cv.pdf` and link it here.

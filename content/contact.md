@@ -1,6 +1,6 @@
 ---
-title: "Contact"
-description: "How to reach me."
+  title: "Contact"
+  description: "How to reach me."
 ---
 
 - Email: `wpdeng@connect.hku.hk`
