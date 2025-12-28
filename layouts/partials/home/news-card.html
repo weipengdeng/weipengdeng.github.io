@@ -5,8 +5,17 @@
 
 <section class="section">
   <div class="section__header">
-    <h2 class="section__title">News</h2>
-    {{ if $newsPage }}<a class="section__more" href="{{ $newsPage.RelPermalink }}">All</a>{{ end }}
+    <h2 class="section__title">
+      <span class="section__icon" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+          <path d="M6 18a2 2 0 1 0 0.001 0Z" fill="currentColor"/>
+          <path d="M4 4a16 16 0 0 1 16 16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M4 11a9 9 0 0 1 9 9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <span>News</span>
+    </h2>
+    {{ if $newsPage }}<a class="section__more" href="{{ $newsPage.RelPermalink }}">view all »</a>{{ end }}
   </div>
 
   {{ if not (len $news) }}

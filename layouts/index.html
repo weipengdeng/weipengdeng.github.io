@@ -1,10 +1,6 @@
 {{ define "main" }}
   {{ partial "home/profile-card.html" . }}
-
-  <div class="home-grid-2">
-    {{ partial "home/news-card.html" . }}
-    {{ partial "home/experience-card.html" . }}
-  </div>
-
+  {{ partial "home/news-card.html" . }}
+  {{ partial "home/experience-card.html" . }}
   {{ partial "home/publications-card.html" . }}
 {{ end }}

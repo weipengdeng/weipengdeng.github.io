@@ -5,8 +5,15 @@
 
 <section class="section">
   <div class="section__header">
-    <h2 class="section__title">Selected Publications</h2>
-    {{ if $pubPage }}<a class="section__more" href="{{ $pubPage.RelPermalink }}">All</a>{{ end }}
+    <h2 class="section__title">
+      <span class="section__icon" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+          <path d="M12 3l2.6 5.6 6.1.7-4.6 4 1.4 6-5.5-3.1-5.5 3.1 1.4-6-4.6-4 6.1-.7L12 3Z" fill="currentColor" opacity="0.92"/>
+        </svg>
+      </span>
+      <span>Selected Publications</span>
+    </h2>
+    {{ if $pubPage }}<a class="section__more" href="{{ $pubPage.RelPermalink }}">view all »</a>{{ end }}
   </div>
 
   {{ if not (len $pubAll) }}
@@ -23,7 +30,7 @@
     {{ if gt (len $tags) 0 }}
       <div class="pub-controls" role="toolbar" aria-label="Publication filters">
         <button class="filter-btn" type="button" data-pub-filter="all" aria-pressed="true">
-          <span class="topic-badge" style="--topic-color:#888">All</span>
+          <span class="topic-badge" style="--topic-color: var(--primary)">All</span>
         </button>
         {{ range $tags }}
           <button class="filter-btn" type="button" data-pub-filter="{{ . }}" aria-pressed="false">
