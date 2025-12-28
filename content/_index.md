@@ -51,7 +51,7 @@ experience:
     dates: "2025 - 2027"
     summary: "Effiencient Utilisation of Stock Space"
     short: "DCE"
-    logo: "images/logos/csus_logo.png"
+    logo: "images/logos/csus_logo.jpg"
   - org: "School of Geography, SCNU"
     title: "External Supervisor"
     dates: "2024 - 2027"

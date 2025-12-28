@@ -3,6 +3,6 @@ title: "Contact"
 description: "How to reach me."
 ---
 
-- Email: `you@example.com`
-- GitHub: `https://github.com/your-handle`
+- Email: `wpdeng@connect.hku.hk`
+- GitHub: `https://github.com/weipengdeng`
 
