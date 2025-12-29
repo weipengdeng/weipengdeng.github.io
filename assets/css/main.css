@@ -1130,7 +1130,7 @@ a:hover {
 
 .gallery__media {
   width: 100%;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: var(--gallery-ratio, 4 / 3);
   border-radius: 18px;
   border: 1px solid var(--border);
   background: color-mix(in srgb, #000 22%, var(--bg-elev));
@@ -1148,13 +1148,38 @@ a:hover {
 
 .gallery__caption {
   margin-top: 0.65rem;
-  padding: 0.55rem 0.85rem;
+  padding: 0.45rem 0.6rem;
   border-radius: 14px;
   border: 1px solid var(--border);
   background: color-mix(in srgb, var(--bg-elev) 86%, #000 4%);
   color: var(--muted);
-  text-align: center;
   font-size: 0.92rem;
+  display: grid;
+  grid-template-columns: 34px 1fr 34px;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.gallery__caption-text {
+  text-align: center;
+  line-height: 1.35;
+}
+
+.gallery__nav-btn {
+  width: 34px;
+  height: 30px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--bg) 70%, transparent);
+  color: var(--text);
+  font-weight: 900;
+  font-size: 1.05rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.gallery__nav-btn:hover {
+  box-shadow: var(--shadow);
 }
 
 @media (max-width: 860px) {

@@ -18,21 +18,37 @@
   {{- end -}}
 {{- end -}}
 
-{{- $img := $res -}}
+{{- $imgSmall := "" -}}
+{{- $imgLarge := "" -}}
 {{- if $res -}}
-  {{- $img = $res.Fit "1200x900 webp q85" -}}
+  {{- if gt $res.Width 2400 -}}
+    {{- $imgLarge = $res.Resize "2400x webp q95" -}}
+  {{- else -}}
+    {{- $imgLarge = $res.Process "webp q95" -}}
+  {{- end -}}
+
+  {{- if gt $res.Width 1400 -}}
+    {{- $imgSmall = $res.Resize "1400x webp q92" -}}
+  {{- else -}}
+    {{- $imgSmall = $imgLarge -}}
+  {{- end -}}
 {{- end -}}
 
 <figure class="gallery__item">
   <div class="gallery__media">
-    {{- if $img -}}
-      <img src="{{ $img.RelPermalink }}" alt="{{ $alt | plainify }}" loading="lazy" decoding="async" />
+    {{- if $imgSmall -}}
+      {{- if and $imgLarge (ne $imgSmall.RelPermalink $imgLarge.RelPermalink) -}}
+        <img src="{{ $imgSmall.RelPermalink }}" srcset="{{ $imgSmall.RelPermalink }} {{ $imgSmall.Width }}w, {{ $imgLarge.RelPermalink }} {{ $imgLarge.Width }}w" sizes="(max-width: 860px) 100vw, 760px" alt="{{ $alt | plainify }}" loading="lazy" decoding="async" />
+      {{- else -}}
+        <img src="{{ $imgSmall.RelPermalink }}" alt="{{ $alt | plainify }}" loading="lazy" decoding="async" />
+      {{- end -}}
     {{- else -}}
       <img src="{{ $src | safeURL }}" alt="{{ $alt | plainify }}" loading="lazy" decoding="async" />
     {{- end -}}
   </div>
-  {{- if $caption -}}
-    <figcaption class="gallery__caption">{{ $caption }}</figcaption>
-  {{- end -}}
+  <figcaption class="gallery__caption">
+    <button class="gallery__nav-btn" type="button" data-gallery-nav="-1" aria-label="Previous image">&lsaquo;</button>
+    <span class="gallery__caption-text">{{ $caption }}</span>
+    <button class="gallery__nav-btn" type="button" data-gallery-nav="1" aria-label="Next image">&rsaquo;</button>
+  </figcaption>
 </figure>
-

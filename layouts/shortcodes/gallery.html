@@ -1,4 +1,6 @@
-<div class="gallery" aria-label="Image gallery">
+{{- $ratio := .Get "ratio" | default "4/3" -}}
+{{- $ratio = replaceRE "\\s*/\\s*" " / " $ratio -}}
+<div class="gallery" aria-label="Image gallery" style="--gallery-ratio: {{ $ratio | safeCSS }};">
   <div class="gallery__track">
     {{ .Inner }}
   </div>
@@ -6,4 +8,3 @@
     <div class="item__meta" style="margin-top:0.6rem;text-align:center">{{ . }}</div>
   {{ end }}
 </div>
-
