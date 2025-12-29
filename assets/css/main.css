@@ -1000,8 +1000,8 @@ a:hover {
 }
 
 .sdg-icon {
-  width: 34px;
-  height: 34px;
+  width: 36px;
+  height: 36px;
   border-radius: 14px;
   border: 1px solid transparent;
   padding: 2px;
@@ -1014,6 +1014,15 @@ a:hover {
     ) border-box;
   display: grid;
   place-items: center;
+  overflow: hidden;
+}
+
+.sdg-icon__img {
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+  display: block;
 }
 
 .sdg-icon__num {

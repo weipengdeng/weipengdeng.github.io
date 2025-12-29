@@ -10,7 +10,15 @@
 {{- if not $label -}}{{- $label = printf "SDG %s" $id -}}{{- end -}}
 {{- if not $color -}}{{- $color = site.Params.primary | default "#2563eb" -}}{{- end -}}
 
-<span class="sdg-icon" style="--sdg-color: {{ $color }}" title="SDG {{ $id }} · {{ $label }}" aria-label="SDG {{ $id }} · {{ $label }}">
-  <span class="sdg-icon__num">{{ $id }}</span>
-</span>
+{{- $num := int $id -}}
+{{- $iconPath := printf "images/sdgs/E-WEB-Goal-%02d.png" $num -}}
+{{- $icon := resources.Get $iconPath -}}
 
+<span class="sdg-icon" style="--sdg-color: {{ $color }}" title="SDG {{ $id }} · {{ $label }}" aria-label="SDG {{ $id }} · {{ $label }}">
+  {{- if $icon -}}
+    {{- $img := $icon.Fit "72x72 webp q90" -}}
+    <img class="sdg-icon__img" src="{{ $img.RelPermalink }}" width="36" height="36" alt="SDG {{ $id }}" loading="lazy" decoding="async" />
+  {{- else -}}
+    <span class="sdg-icon__num">{{ $id }}</span>
+  {{- end -}}
+</span>

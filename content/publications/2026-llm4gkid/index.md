@@ -14,7 +14,7 @@ year: 2026
 
 tags:
   - "Adaptive Commercial Systems"
-  - "Equitable Foodscape"
+  - "Equitable Foodscapes"
 
 links:
   pdf: "https://arxiv.org/abs/0000.00000"
