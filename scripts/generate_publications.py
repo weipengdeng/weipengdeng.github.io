@@ -6,6 +6,7 @@ import datetime as dt
 import os
 import re
 import shutil
+import sys
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Dict, Iterable, List, Optional, Tuple
@@ -16,6 +17,7 @@ class BibEntry:
     entry_type: str
     citekey: str
     fields: Dict[str, str]
+    raw: str = ""
 
 
 def _strip_wrapping_braces(value: str) -> str:
@@ -86,6 +88,7 @@ def parse_bibtex(text: str) -> List[BibEntry]:
             i += 1
             continue
 
+        entry_start = i
         i += 1
         i = skip_ws(i)
         start = i
@@ -94,6 +97,7 @@ def parse_bibtex(text: str) -> List[BibEntry]:
         entry_type = text[start:i].strip().lower()
         i = skip_ws(i)
         if i >= n or text[i] not in "{(":
+            i = entry_start + 1
             continue
         open_ch = text[i]
         close_ch = "}" if open_ch == "{" else ")"
@@ -175,8 +179,13 @@ def parse_bibtex(text: str) -> List[BibEntry]:
             raw = raw.strip('"')
             fields[name] = raw
 
+        raw_entry = text[entry_start:i].strip()
         if citekey:
-            entries.append(BibEntry(entry_type=entry_type, citekey=citekey, fields=fields))
+            entries.append(
+                BibEntry(
+                    entry_type=entry_type, citekey=citekey, fields=fields, raw=raw_entry
+                )
+            )
 
     return entries
 
@@ -202,6 +211,88 @@ def _venue_for_entry(fields: Dict[str, str]) -> str:
         or fields.get("howpublished")
         or ""
     ).strip()
+
+
+_VENUE_STOPWORDS = {
+    "and",
+    "of",
+    "the",
+    "for",
+    "in",
+    "on",
+    "to",
+    "a",
+    "an",
+    "with",
+}
+
+_VENUE_WORD_ABBR = {
+    "academy": "Acad.",
+    "analysis": "Anal.",
+    "applications": "Appl.",
+    "application": "Appl.",
+    "behaviour": "Behav.",
+    "behavior": "Behav.",
+    "communications": "Commun.",
+    "computer": "Comput.",
+    "conference": "Conf.",
+    "engineering": "Eng.",
+    "environment": "Environ.",
+    "environmental": "Environ.",
+    "information": "Inf.",
+    "intelligent": "Intell.",
+    "international": "Int.",
+    "journal": "J.",
+    "letters": "Lett.",
+    "management": "Manag.",
+    "national": "Natl.",
+    "proceedings": "Proc.",
+    "research": "Res.",
+    "science": "Sci.",
+    "society": "Soc.",
+    "systems": "Syst.",
+    "technology": "Technol.",
+    "transportation": "Transp.",
+    "transactions": "Trans.",
+    "university": "Univ.",
+}
+
+
+def abbreviate_venue(venue: str) -> str:
+    venue = _collapse_ws(_strip_wrapping_braces(venue))
+    if not venue:
+        return ""
+
+    # If it already looks abbreviated, keep it.
+    if "." in venue:
+        return venue
+
+    out: List[str] = []
+    for raw in venue.split():
+        tok = raw
+        trailing = ""
+        while tok and tok[-1] in ",:;":
+            trailing = tok[-1] + trailing
+            tok = tok[:-1]
+
+        core = tok.strip("()[]{}")
+        if not core:
+            continue
+        low = core.lower()
+        if low in _VENUE_STOPWORDS:
+            continue
+
+        if core.isupper() and 2 <= len(core) <= 6:
+            out.append(core + trailing)
+            continue
+        if re.fullmatch(r"[A-Z]", core):
+            out.append(core + trailing)
+            continue
+
+        repl = _VENUE_WORD_ABBR.get(low)
+        out.append((repl or core) + trailing)
+
+    return " ".join(out)
 
 
 def _tags_for_entry(fields: Dict[str, str]) -> List[str]:
@@ -235,7 +326,17 @@ def _links_for_entry(fields: Dict[str, str]) -> Dict[str, str]:
 
     pdf = fields.get("pdf", "").strip()
     if pdf:
-        links["pdf"] = pdf
+        if pdf.lower().startswith("10."):
+            links["pdf"] = f"https://doi.org/{pdf}"
+        else:
+            links["pdf"] = pdf
+
+    doi = fields.get("doi", "").strip()
+    if doi and "pdf" not in links:
+        if doi.lower().startswith("http"):
+            links["pdf"] = doi
+        else:
+            links["pdf"] = f"https://doi.org/{doi}"
 
     code = fields.get("code", "").strip() or fields.get("github", "").strip()
     if code:
@@ -248,7 +349,8 @@ def render_markdown(entry: BibEntry) -> str:
     f = entry.fields
     title = _unescape_basic_latex(_collapse_ws(f.get("title", entry.citekey)))
     authors = _parse_author_list(f.get("author", ""))
-    venue = _unescape_basic_latex(_collapse_ws(_venue_for_entry(f)))
+    venue_full = _unescape_basic_latex(_collapse_ws(_venue_for_entry(f)))
+    venue = abbreviate_venue(venue_full)
     date = _date_for_entry(f)
     year = f.get("year", str(date.year)).strip()
     abstract = _unescape_basic_latex(f.get("abstract", "")).strip()
@@ -259,7 +361,8 @@ def render_markdown(entry: BibEntry) -> str:
     lines.append("---")
     lines.append(f'title: {_yaml_quote(title)}')
     lines.append(f"date: {date.isoformat()}")
-    lines.append(f"description: {_yaml_quote(_collapse_ws(f.get('abstract', '')[:160]))}")
+    desc = _collapse_ws(abstract)[:160]
+    lines.append(f"# description: {_yaml_quote(desc)}")
     if authors:
         lines.append("authors:")
         for a in authors:
@@ -267,7 +370,10 @@ def render_markdown(entry: BibEntry) -> str:
     if venue:
         lines.append(f"venue: {_yaml_quote(venue)}")
     if year:
-        lines.append(f"year: {year}")
+        if year.isdigit():
+            lines.append(f"year: {year}")
+        else:
+            lines.append(f"year: {_yaml_quote(year)}")
     if tags:
         lines.append("tags:")
         for t in tags:
@@ -277,48 +383,56 @@ def render_markdown(entry: BibEntry) -> str:
         for k in ("pdf", "code", "project"):
             if k in links:
                 lines.append(f"  {k}: {_yaml_quote(links[k])}")
-    lines.append(f"bibtex_key: {_yaml_quote(entry.citekey)}")
-    lines.append("generated_from_bib: true")
     lines.append("---")
     lines.append("")
+
+    lines.append("## Citation")
+    lines.append("")
+    lines.append("```bibtex")
+    bib = entry.raw.strip() or f"@{entry.entry_type}{{{entry.citekey}, ...}}"
+    lines.append(bib.rstrip())
+    lines.append("```")
+
     if abstract:
+        lines.append("---")
+        lines.append("")
         lines.append("## Abstract")
         lines.append("")
         lines.append(abstract)
         lines.append("")
-    lines.append("## Citation")
-    lines.append("")
-    lines.append("```bibtex")
-    lines.append(_collapse_ws(f"@{entry.entry_type}{{{entry.citekey}, ... }}"))
-    lines.append("```")
-    lines.append("")
-    lines.append("> Add `thumbnail.png` next to this `index.md` for a card image + OpenGraph preview.")
-    lines.append("")
     return "\n".join(lines)
 
 
 def main(argv: Optional[List[str]] = None) -> int:
     parser = argparse.ArgumentParser(
-        description="Generate Hugo publication bundles from a BibTeX file."
+        description="Generate Hugo publication bundles from BibTeX."
     )
-    parser.add_argument("--bib", default="bibliography/publications.bib")
+    parser.add_argument(
+        "--bib",
+        default="bibliography/publications.bib",
+        help="Path to a .bib file, or '-' to read BibTeX from stdin.",
+    )
+    parser.add_argument(
+        "--entry",
+        help="Inline BibTeX string (overrides --bib).",
+    )
     parser.add_argument("--out", default="content/publications")
     parser.add_argument(
         "--clean-generated",
         action="store_true",
-        help="Delete previously generated bundles (directories with generated_from_bib marker).",
+        help="Delete previously generated bundles (directories with a .generated_from_bib marker file).",
     )
     args = parser.parse_args(argv)
 
-    bib_path = Path(args.bib)
     out_dir = Path(args.out)
-
-    if not bib_path.exists():
-        raise SystemExit(f"BibTeX not found: {bib_path}")
     out_dir.mkdir(parents=True, exist_ok=True)
 
     if args.clean_generated:
         for child in out_dir.iterdir():
+            marker = child / ".generated_from_bib"
+            if marker.is_file():
+                shutil.rmtree(child)
+                continue
             index_md = child / "index.md"
             if not index_md.is_file():
                 continue
@@ -326,7 +440,15 @@ def main(argv: Optional[List[str]] = None) -> int:
             if "generated_from_bib: true" in txt:
                 shutil.rmtree(child)
 
-    text = bib_path.read_text(encoding="utf-8", errors="replace")
+    if args.entry:
+        text = args.entry
+    elif args.bib == "-":
+        text = sys.stdin.read()
+    else:
+        bib_path = Path(args.bib)
+        if not bib_path.exists():
+            raise SystemExit(f"BibTeX not found: {bib_path}")
+        text = bib_path.read_text(encoding="utf-8", errors="replace")
     entries = parse_bibtex(text)
 
     created = 0
@@ -342,6 +464,9 @@ def main(argv: Optional[List[str]] = None) -> int:
         bundle_dir.mkdir(parents=True, exist_ok=True)
         (bundle_dir / "index.md").write_text(
             render_markdown(entry), encoding="utf-8", newline="\n"
+        )
+        (bundle_dir / ".generated_from_bib").write_text(
+            f"{entry.citekey}\n", encoding="utf-8", newline="\n"
         )
         created += 1
 

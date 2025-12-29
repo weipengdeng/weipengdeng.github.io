@@ -1,6 +1,7 @@
 /.hugo_build.lock
 /public/
 /resources/_gen/
+**/.generated_from_bib
 
 # OS/editor
 Thumbs.db

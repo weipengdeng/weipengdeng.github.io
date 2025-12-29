@@ -25,13 +25,5 @@
     {{ end }}
 
     <div class="prose">{{ .Content }}</div>
-
-    {{ $thumb := .Resources.GetMatch "*thumbnail*" }}
-    {{ if $thumb }}
-      {{ $img := $thumb.Fit "960x640 webp q85" }}
-      <figure class="pub-hero">
-        <img src="{{ $img.RelPermalink }}" alt="Thumbnail for {{ .Title }}" loading="lazy" decoding="async" />
-      </figure>
-    {{ end }}
   </article>
 {{ end }}
