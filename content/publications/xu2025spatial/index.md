@@ -5,7 +5,6 @@ description: "Analysis on GBA's spatial clustering and production frontiers to q
 
 authors:
   - "Yuhan Xu"
-  - "Yihong Tang"
   - "Chen Chen"
   - "Weipeng Deng"
   - "Linli Dai"
