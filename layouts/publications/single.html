@@ -24,6 +24,14 @@
       </div>
     {{ end }}
 
+    {{ with .Params.sdgs }}
+      <div class="sdg-row" aria-label="SDG alignment">
+        {{ range . }}
+          {{ partial "sdg-icon.html" . }}
+        {{ end }}
+      </div>
+    {{ end }}
+
     <div class="prose">{{ .Content }}</div>
   </article>
 {{ end }}

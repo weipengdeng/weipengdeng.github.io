@@ -1,0 +1,38 @@
+{{- $src := .Get "src" | default "" -}}
+{{- if not $src -}}
+  {{- errorf "slide shortcode requires src: %s" .Position -}}
+{{- end -}}
+
+{{- $caption := .Get "caption" | default "" -}}
+{{- $alt := .Get "alt" | default $caption -}}
+
+{{- $res := "" -}}
+{{- if not (or (hasPrefix $src "http://") (hasPrefix $src "https://")) -}}
+  {{- with .Page.Resources.GetMatch $src -}}
+    {{- $res = . -}}
+  {{- else -}}
+    {{- $matches := resources.Match (replaceRE "^/" "" $src) -}}
+    {{- if gt (len $matches) 0 -}}
+      {{- $res = index $matches 0 -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $img := $res -}}
+{{- if $res -}}
+  {{- $img = $res.Fit "1200x900 webp q85" -}}
+{{- end -}}
+
+<figure class="gallery__item">
+  <div class="gallery__media">
+    {{- if $img -}}
+      <img src="{{ $img.RelPermalink }}" alt="{{ $alt | plainify }}" loading="lazy" decoding="async" />
+    {{- else -}}
+      <img src="{{ $src | safeURL }}" alt="{{ $alt | plainify }}" loading="lazy" decoding="async" />
+    {{- end -}}
+  </div>
+  {{- if $caption -}}
+    <figcaption class="gallery__caption">{{ $caption }}</figcaption>
+  {{- end -}}
+</figure>
+

@@ -1,0 +1,14 @@
+{{- $goal := .Get "goal" | default (.Get 0) -}}
+{{- if not $goal -}}
+  {{- errorf "sdghl shortcode requires goal id: %s" .Position -}}
+{{- end -}}
+
+{{- $id := printf "%v" $goal -}}
+{{- $color := "" -}}
+{{- with index site.Data.sdgs $id -}}
+  {{- with .color -}}{{- $color = . -}}{{- end -}}
+{{- end -}}
+{{- if not $color -}}{{- $color = "#2563eb" -}}{{- end -}}
+
+<span class="sdg-hl" style="--sdg-color: {{ $color }}">{{ .Inner }}</span>
+

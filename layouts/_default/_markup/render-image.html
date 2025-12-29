@@ -1,0 +1,17 @@
+{{- $src := .Destination -}}
+{{- $alt := .Text | default "" -}}
+
+{{- $caption := "" -}}
+{{- with .Title -}}
+  {{- $caption = . -}}
+{{- else -}}
+  {{- $caption = .Text -}}
+{{- end -}}
+
+<figure class="md-figure" data-md-figure>
+  <img class="md-img" src="{{ $src | safeURL }}" alt="{{ $alt | plainify }}" loading="lazy" decoding="async" />
+  {{- if $caption -}}
+    <figcaption class="md-caption">{{ $caption }}</figcaption>
+  {{- end -}}
+</figure>
+

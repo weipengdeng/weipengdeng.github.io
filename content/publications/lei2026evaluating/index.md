@@ -18,6 +18,8 @@ tags:
 
 links:
   pdf: "https://doi.org/10.1016/j.tra.2025.104842"
+
+sdgs: [10, 11]
 ---
 
 

@@ -13,10 +13,17 @@
     {{ $themeJs := resources.Get "js/theme.js" | minify | fingerprint }}
     <script defer src="{{ $themeJs.RelPermalink }}" integrity="{{ $themeJs.Data.Integrity }}"></script>
 
+    {{ $imgJs := resources.Get "js/image-interactions.js" | minify | fingerprint }}
+    <script defer src="{{ $imgJs.RelPermalink }}" integrity="{{ $imgJs.Data.Integrity }}"></script>
+
     {{ if or .IsHome (and (eq .Section "publications") (eq .Kind "section")) }}
       {{ $pubJs := resources.Get "js/publications-filter.js" | minify | fingerprint }}
       <script defer src="{{ $pubJs.RelPermalink }}" integrity="{{ $pubJs.Data.Integrity }}"></script>
     {{ end }}
+
+    {{ if and (eq .Section "publications") (eq .Kind "page") }}
+      {{ $copyJs := resources.Get "js/code-copy.js" | minify | fingerprint }}
+      <script defer src="{{ $copyJs.RelPermalink }}" integrity="{{ $copyJs.Data.Integrity }}"></script>
+    {{ end }}
   </body>
 </html>
-

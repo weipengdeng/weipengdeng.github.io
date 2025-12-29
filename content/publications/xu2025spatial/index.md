@@ -19,7 +19,9 @@ tags:
 links:
   pdf: "https://www.nature.com/articles/s42949-025-00231-x"
   code: "https://github.com/Sealxuyh/PPF-GBA"
-  project: "https://weipengdeng.github.io/Sustainable Built Environments/"
+  project: "https://weipengdeng.github.io/Sustainable%20Built%20Environments/"
+
+sdgs: [2, 11, 15]
 ---
 
 
@@ -41,4 +43,9 @@ links:
 
 ## Abstract
 
-Balancing ecological sustainability with socio-economic development presents a significant challenge for mega-urban regions. Here we introduce a spatial analysis framework that combines clustering techniques with production possibility frontier methodology to quantify and visualize the trade-offs between ecosystem service value and socio-economic well-being. Applying this to the Guangdong-Hong Kong-Macao Greater Bay Area, we identified five distinct eco-socio-economic zones, each requiring different management approaches. Our analysis revealed that economically developed coastal areas exhibit high production efficiency but limited ecological capacity, while less-developed peripheral areas demonstrate significant untapped potential for ecosystem services enhancement. Based on these insights, we formulated tailored strategies for sustainable urban management, including targeted ecological compensation mechanisms between beneficiary and provider regions. This integrated approach provides environmental planners and urban policymakers with a practical toolkit for optimizing sustainability outcomes in complex urban agglomerations, balancing regional economic aspirations with ecological imperatives.
+Balancing ecological sustainability with socio-economic development presents a significant challenge for mega-urban regions. Here we introduce a spatial analysis framework that combines clustering techniques with production possibility frontier methodology to quantify and visualize the trade-offs between {{< sdghl goal="15" >}}ecosystem service value{{< /sdghl >}} and  {{< sdghl goal="3" >}} socio-economic well-being{{< /sdghl >}}. Applying this to the Guangdong-Hong Kong-Macao Greater Bay Area, we identified five distinct eco-socio-economic zones, each requiring different management approaches. Our analysis revealed that economically developed coastal areas exhibit high production efficiency but limited ecological capacity, while less-developed peripheral areas demonstrate significant untapped potential for ecosystem services enhancement. Based on these insights, we formulated tailored strategies for {{< sdghl goal="12" >}}sustainable urban management{{< /sdghl >}}, including targeted ecological compensation mechanisms between beneficiary and provider regions. This integrated approach provides environmental planners and urban policymakers with a practical toolkit for optimizing sustainability outcomes in complex urban agglomerations, balancing regional economic aspirations with ecological imperatives.
+
+{{< gallery >}}
+{{< slide src="figurel.png" caption="Spatial distribution of ecosystem service supply-demand ratio" >}}
+{{< slide src="figure2.png" caption="Classification of the GBA into five distinct eco-socio-economic zones" >}}
+{{< /gallery >}}

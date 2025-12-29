@@ -1,0 +1,9 @@
+<div class="gallery" aria-label="Image gallery">
+  <div class="gallery__track">
+    {{ .Inner }}
+  </div>
+  {{ with (.Get "note") }}
+    <div class="item__meta" style="margin-top:0.6rem;text-align:center">{{ . }}</div>
+  {{ end }}
+</div>
+

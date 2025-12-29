@@ -1,0 +1,16 @@
+{{- $id := printf "%v" . -}}
+{{- $label := "" -}}
+{{- $color := "" -}}
+
+{{- with index site.Data.sdgs $id -}}
+  {{- with .label -}}{{- $label = . -}}{{- end -}}
+  {{- with .color -}}{{- $color = . -}}{{- end -}}
+{{- end -}}
+
+{{- if not $label -}}{{- $label = printf "SDG %s" $id -}}{{- end -}}
+{{- if not $color -}}{{- $color = site.Params.primary | default "#2563eb" -}}{{- end -}}
+
+<span class="sdg-icon" style="--sdg-color: {{ $color }}" title="SDG {{ $id }} · {{ $label }}" aria-label="SDG {{ $id }} · {{ $label }}">
+  <span class="sdg-icon__num">{{ $id }}</span>
+</span>
+
