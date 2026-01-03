@@ -74,7 +74,7 @@ awards:
     org: "Royal Town Planning Institute"
     year: 2025
     level: "Distinction"
-  - title: "Innovation Award"
+  - title: "Invention Award"
     org: " 50th International Exhibition of Inventions Geneva"
     year: 2025
     level: "Gold"

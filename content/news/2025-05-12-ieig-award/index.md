@@ -20,7 +20,7 @@ This invention is the result of close collaboration among **Prof.Tianren Yang, P
 
 I would like to sincerely acknowledge the supervision, guidance, and support provided by senior collaborators and institutional partners throughout the development of this work. I am also deeply grateful to the IEIG organizing committee and award committee for this recognition, and for maintaining such a high-standard international platform for showcasing impactful innovations.
 
-![Diplome](diplome.png)
+![Diplomas](diplomas.png)
 
 
 ---
