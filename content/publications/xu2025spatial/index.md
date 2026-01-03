@@ -49,3 +49,7 @@ Balancing ecological sustainability with socio-economic development presents a s
 {{< slide src="figure1.png" caption="Fig. 1 Spatial distribution of ecosystem service supply-demand ratio" >}}
 {{< slide src="figure2.png" caption="Fig. 2 Classification of the GBA into five distinct eco-socio-economic zones" >}}
 {{< /gallery >}}
+
+---
+**Links:**
+* [Read more about this article](https://www.nature.com/articles/s42949-025-00231-x)
