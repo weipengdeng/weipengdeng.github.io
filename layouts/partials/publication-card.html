@@ -5,6 +5,61 @@
 {{ $year := $page.Params.year }}
 {{ $links := $page.Params.links }}
 {{ $desc := $page.Params.description }}
+{{ $ribbons := slice }}
+{{ with $page.Params.awards }}
+  {{ if reflect.IsSlice . }}
+    {{ range . }}
+      {{ $label := "" }}
+      {{ if reflect.IsMap . }}
+        {{ with .label }}{{ $label = . }}{{ end }}
+        {{ if not $label }}{{ with .title }}{{ $label = . }}{{ end }}{{ end }}
+        {{ if not $label }}{{ with .text }}{{ $label = . }}{{ end }}{{ end }}
+      {{ else if reflect.IsBool . }}
+        {{ if . }}{{ $label = "Award" }}{{ end }}
+      {{ else }}
+        {{ $label = printf "%v" . }}
+      {{ end }}
+      {{ if $label }}{{ $ribbons = $ribbons | append $label }}{{ end }}
+    {{ end }}
+  {{ else if reflect.IsMap . }}
+    {{ $label := "" }}
+    {{ with .label }}{{ $label = . }}{{ end }}
+    {{ if not $label }}{{ with .title }}{{ $label = . }}{{ end }}{{ end }}
+    {{ if not $label }}{{ with .text }}{{ $label = . }}{{ end }}{{ end }}
+    {{ if $label }}{{ $ribbons = $ribbons | append $label }}{{ end }}
+  {{ else if reflect.IsBool . }}
+    {{ if . }}{{ $ribbons = $ribbons | append "Award" }}{{ end }}
+  {{ else }}
+    {{ $ribbons = $ribbons | append (printf "%v" .) }}
+  {{ end }}
+{{ end }}
+{{ with $page.Params.award }}
+  {{ if reflect.IsSlice . }}
+    {{ range . }}
+      {{ $label := "" }}
+      {{ if reflect.IsMap . }}
+        {{ with .label }}{{ $label = . }}{{ end }}
+        {{ if not $label }}{{ with .title }}{{ $label = . }}{{ end }}{{ end }}
+        {{ if not $label }}{{ with .text }}{{ $label = . }}{{ end }}{{ end }}
+      {{ else if reflect.IsBool . }}
+        {{ if . }}{{ $label = "Award" }}{{ end }}
+      {{ else }}
+        {{ $label = printf "%v" . }}
+      {{ end }}
+      {{ if $label }}{{ $ribbons = $ribbons | append $label }}{{ end }}
+    {{ end }}
+  {{ else if reflect.IsMap . }}
+    {{ $label := "" }}
+    {{ with .label }}{{ $label = . }}{{ end }}
+    {{ if not $label }}{{ with .title }}{{ $label = . }}{{ end }}{{ end }}
+    {{ if not $label }}{{ with .text }}{{ $label = . }}{{ end }}{{ end }}
+    {{ if $label }}{{ $ribbons = $ribbons | append $label }}{{ end }}
+  {{ else if reflect.IsBool . }}
+    {{ if . }}{{ $ribbons = $ribbons | append "Award" }}{{ end }}
+  {{ else }}
+    {{ $ribbons = $ribbons | append (printf "%v" .) }}
+  {{ end }}
+{{ end }}
 
 {{ $tags := slice }}
 {{ with $page.Params.tags }}
@@ -22,6 +77,11 @@
   {{ if $thumb }}
     {{ $img := $thumb.Fit "520x368 webp q80" }}
     <a class="pub-thumb" href="{{ $page.RelPermalink }}" aria-label="Open publication">
+      {{ if $ribbons }}
+        {{ range $i, $label := $ribbons }}
+          <span class="pub-ribbon" style="--ribbon-offset: {{ printf "%.2frem" (mul $i 1.35) }};" title="{{ $label }}">{{ $label }}</span>
+        {{ end }}
+      {{ end }}
       <img src="{{ $img.RelPermalink }}" alt="" loading="lazy" decoding="async" />
     </a>
   {{ else }}

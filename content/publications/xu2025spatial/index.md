@@ -16,10 +16,13 @@ year: 2025
 tags:
   - "Sustainable Built Environments"
 
+awards: {label: “Qian Xuesen Urban Studies Gold Medal Nomination Award”}
+
 links:
   pdf: "https://www.nature.com/articles/s42949-025-00231-x"
   code: "https://github.com/Sealxuyh/PPF-GBA"
   project: "https://weipengdeng.github.io/Sustainable%20Built%20Environments/"
+
 
 sdgs: [10, 11, 15]
 ---

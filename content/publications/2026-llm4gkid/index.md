@@ -16,6 +16,8 @@ tags:
   - "Adaptive Commercial Systems"
   - "Equitable Foodscapes"
 
+awards: {label: “Best Student Presentation Award (Silver)”}
+
 links:
   pdf: "https://arxiv.org/abs/0000.00000"
   code: "https://github.com/weipengdeng/LLM4GKID"
