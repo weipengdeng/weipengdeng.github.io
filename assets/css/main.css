@@ -896,7 +896,6 @@ a:hover {
   width: 100%;
   aspect-ratio: 3 / 2;
   height: auto;
-  position: relative;
   border-radius: 14px;
   border: 1px solid var(--border);
   background: linear-gradient(135deg, rgba(37, 99, 235, 0.14), rgba(99, 102, 241, 0.10));
@@ -905,41 +904,6 @@ a:hover {
   place-items: center;
   font-weight: 800;
   color: var(--muted);
-}
-
-.pub-ribbon {
-  position: absolute;
-  top: calc(0.55rem + var(--ribbon-offset, 0rem));
-  left: 0;
-  z-index: 2;
-  max-width: calc(100% - 1rem);
-  padding: 0.22rem 0.65rem 0.22rem 0.6rem;
-  border-radius: 0 12px 12px 0;
-  background: linear-gradient(
-    135deg,
-    color-mix(in srgb, var(--primary) 92%, #000),
-    color-mix(in srgb, var(--primary) 70%, #000)
-  );
-  color: var(--primary-contrast);
-  font-weight: 900;
-  font-size: 0.72rem;
-  line-height: 1.1;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  box-shadow: 0 10px 22px rgba(2, 6, 23, 0.25);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  pointer-events: none;
-}
-
-.pub-ribbon::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 100%;
-  border-top: 0.34rem solid color-mix(in srgb, var(--primary) 58%, #000);
-  border-left: 0.34rem solid transparent;
 }
 
 .pub-thumb img {
@@ -995,6 +959,22 @@ a:hover {
   flex-wrap: wrap;
   gap: 0.5rem;
   margin-top: 0.55rem;
+}
+
+.award-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.55rem;
+  justify-content: center;
+}
+
+.award-badge {
+  text-decoration: none;
+}
+
+.award-badge:hover {
+  text-decoration: none;
 }
 
 .pub-abstract {

@@ -5,59 +5,46 @@
 {{ $year := $page.Params.year }}
 {{ $links := $page.Params.links }}
 {{ $desc := $page.Params.description }}
-{{ $ribbons := slice }}
-{{ with $page.Params.awards }}
-  {{ if reflect.IsSlice . }}
-    {{ range . }}
+{{ $awards := slice }}
+{{ $awardInputs := slice }}
+{{ with $page.Params.awards }}{{ $awardInputs = $awardInputs | append . }}{{ end }}
+{{ with $page.Params.award }}{{ $awardInputs = $awardInputs | append . }}{{ end }}
+{{ range $awardInputs }}
+  {{ $raw := . }}
+  {{ if reflect.IsSlice $raw }}
+    {{ range $raw }}
       {{ $label := "" }}
+      {{ $href := "" }}
       {{ if reflect.IsMap . }}
         {{ with .label }}{{ $label = . }}{{ end }}
         {{ if not $label }}{{ with .title }}{{ $label = . }}{{ end }}{{ end }}
         {{ if not $label }}{{ with .text }}{{ $label = . }}{{ end }}{{ end }}
+        {{ with .link }}{{ $href = printf "%v" . }}{{ end }}
+        {{ if not $href }}{{ with .href }}{{ $href = printf "%v" . }}{{ end }}{{ end }}
+        {{ if not $href }}{{ with .url }}{{ $href = printf "%v" . }}{{ end }}{{ end }}
       {{ else if reflect.IsBool . }}
         {{ if . }}{{ $label = "Award" }}{{ end }}
       {{ else }}
         {{ $label = printf "%v" . }}
       {{ end }}
-      {{ if $label }}{{ $ribbons = $ribbons | append $label }}{{ end }}
+      {{ if $label }}{{ $awards = $awards | append (dict "label" $label "href" $href) }}{{ end }}
     {{ end }}
-  {{ else if reflect.IsMap . }}
-    {{ $label := "" }}
-    {{ with .label }}{{ $label = . }}{{ end }}
-    {{ if not $label }}{{ with .title }}{{ $label = . }}{{ end }}{{ end }}
-    {{ if not $label }}{{ with .text }}{{ $label = . }}{{ end }}{{ end }}
-    {{ if $label }}{{ $ribbons = $ribbons | append $label }}{{ end }}
-  {{ else if reflect.IsBool . }}
-    {{ if . }}{{ $ribbons = $ribbons | append "Award" }}{{ end }}
   {{ else }}
-    {{ $ribbons = $ribbons | append (printf "%v" .) }}
-  {{ end }}
-{{ end }}
-{{ with $page.Params.award }}
-  {{ if reflect.IsSlice . }}
-    {{ range . }}
-      {{ $label := "" }}
-      {{ if reflect.IsMap . }}
-        {{ with .label }}{{ $label = . }}{{ end }}
-        {{ if not $label }}{{ with .title }}{{ $label = . }}{{ end }}{{ end }}
-        {{ if not $label }}{{ with .text }}{{ $label = . }}{{ end }}{{ end }}
-      {{ else if reflect.IsBool . }}
-        {{ if . }}{{ $label = "Award" }}{{ end }}
-      {{ else }}
-        {{ $label = printf "%v" . }}
-      {{ end }}
-      {{ if $label }}{{ $ribbons = $ribbons | append $label }}{{ end }}
+    {{ $label := "" }}
+    {{ $href := "" }}
+    {{ if reflect.IsMap $raw }}
+      {{ with $raw.label }}{{ $label = . }}{{ end }}
+      {{ if not $label }}{{ with $raw.title }}{{ $label = . }}{{ end }}{{ end }}
+      {{ if not $label }}{{ with $raw.text }}{{ $label = . }}{{ end }}{{ end }}
+      {{ with $raw.link }}{{ $href = printf "%v" . }}{{ end }}
+      {{ if not $href }}{{ with $raw.href }}{{ $href = printf "%v" . }}{{ end }}{{ end }}
+      {{ if not $href }}{{ with $raw.url }}{{ $href = printf "%v" . }}{{ end }}{{ end }}
+    {{ else if reflect.IsBool $raw }}
+      {{ if $raw }}{{ $label = "Award" }}{{ end }}
+    {{ else }}
+      {{ $label = printf "%v" $raw }}
     {{ end }}
-  {{ else if reflect.IsMap . }}
-    {{ $label := "" }}
-    {{ with .label }}{{ $label = . }}{{ end }}
-    {{ if not $label }}{{ with .title }}{{ $label = . }}{{ end }}{{ end }}
-    {{ if not $label }}{{ with .text }}{{ $label = . }}{{ end }}{{ end }}
-    {{ if $label }}{{ $ribbons = $ribbons | append $label }}{{ end }}
-  {{ else if reflect.IsBool . }}
-    {{ if . }}{{ $ribbons = $ribbons | append "Award" }}{{ end }}
-  {{ else }}
-    {{ $ribbons = $ribbons | append (printf "%v" .) }}
+    {{ if $label }}{{ $awards = $awards | append (dict "label" $label "href" $href) }}{{ end }}
   {{ end }}
 {{ end }}
 
@@ -77,11 +64,6 @@
   {{ if $thumb }}
     {{ $img := $thumb.Fit "520x368 webp q80" }}
     <a class="pub-thumb" href="{{ $page.RelPermalink }}" aria-label="Open publication">
-      {{ if $ribbons }}
-        {{ range $i, $label := $ribbons }}
-          <span class="pub-ribbon" style="--ribbon-offset: {{ printf "%.2frem" (mul $i 1.35) }};" title="{{ $label }}">{{ $label }}</span>
-        {{ end }}
-      {{ end }}
       <img src="{{ $img.RelPermalink }}" alt="" loading="lazy" decoding="async" />
     </a>
   {{ else }}
@@ -96,6 +78,21 @@
       <div class="topic-row" aria-label="Publication tags">
         {{ range $tags }}
           {{ partial "topic-badge.html" . }}
+        {{ end }}
+      </div>
+    {{ end }}
+
+    {{ if $awards }}
+      <div class="award-row" aria-label="Awards">
+        {{ range $awards }}
+          {{ $label := .label }}
+          {{ $href := .href }}
+          {{ if $href }}
+            {{ $isExternal := or (hasPrefix $href "http://") (hasPrefix $href "https://") }}
+            <a class="badge badge--gold award-badge" href="{{ $href }}"{{ if $isExternal }} target="_blank" rel="noopener"{{ end }}>{{ $label }}</a>
+          {{ else }}
+            <span class="badge badge--gold award-badge">{{ $label }}</span>
+          {{ end }}
         {{ end }}
       </div>
     {{ end }}

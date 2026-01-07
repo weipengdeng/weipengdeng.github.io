@@ -16,7 +16,7 @@ year: 2025
 tags:
   - "Sustainable Built Environments"
 
-awards: {label: “Qian Xuesen Urban Studies Gold Medal Nomination Award”}
+awards: { label: "Qian Xuesen Urban Studies Gold Medal Nomination Award" }
 
 links:
   pdf: "https://www.nature.com/articles/s42949-025-00231-x"
