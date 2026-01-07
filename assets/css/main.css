@@ -966,7 +966,7 @@ a:hover {
   flex-wrap: wrap;
   gap: 0.5rem;
   margin-top: 0.55rem;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .award-badge {

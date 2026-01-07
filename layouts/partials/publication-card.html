@@ -82,6 +82,18 @@
       </div>
     {{ end }}
 
+    {{ with $desc }}
+      <p class="pub-abstract">{{ . }}</p>
+    {{ end }}
+
+    {{ if $links }}
+      <div class="pub-actions">
+        {{ with $links.pdf }}<a class="btn" href="{{ . }}" target="_blank" rel="noopener">PDF</a>{{ end }}
+        {{ with $links.code }}<a class="btn" href="{{ . }}" target="_blank" rel="noopener">Code</a>{{ end }}
+        {{ with $links.project }}<a class="btn" href="{{ . }}" target="_blank" rel="noopener">Project</a>{{ end }}
+      </div>
+    {{ end }}
+
     {{ if $awards }}
       <div class="award-row" aria-label="Awards">
         {{ range $awards }}
@@ -94,18 +106,6 @@
             <span class="badge badge--gold award-badge">{{ $label }}</span>
           {{ end }}
         {{ end }}
-      </div>
-    {{ end }}
-
-    {{ with $desc }}
-      <p class="pub-abstract">{{ . }}</p>
-    {{ end }}
-
-    {{ if $links }}
-      <div class="pub-actions">
-        {{ with $links.pdf }}<a class="btn" href="{{ . }}" target="_blank" rel="noopener">PDF</a>{{ end }}
-        {{ with $links.code }}<a class="btn" href="{{ . }}" target="_blank" rel="noopener">Code</a>{{ end }}
-        {{ with $links.project }}<a class="btn" href="{{ . }}" target="_blank" rel="noopener">Project</a>{{ end }}
       </div>
     {{ end }}
   </div>
