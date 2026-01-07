@@ -892,6 +892,12 @@ a:hover {
   background: var(--bg-elev);
 }
 
+.pub-media {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
 .pub-thumb {
   width: 100%;
   aspect-ratio: 3 / 2;
@@ -965,11 +971,15 @@ a:hover {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  margin-top: 0.55rem;
-  justify-content: flex-start;
+  width: 100%;
+  justify-content: center;
 }
 
 .award-badge {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   text-decoration: none;
 }
 

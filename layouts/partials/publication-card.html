@@ -63,9 +63,25 @@
   {{ end }}
   {{ if $thumb }}
     {{ $img := $thumb.Fit "520x368 webp q80" }}
-    <a class="pub-thumb" href="{{ $page.RelPermalink }}" aria-label="Open publication">
-      <img src="{{ $img.RelPermalink }}" alt="" loading="lazy" decoding="async" />
-    </a>
+    <div class="pub-media">
+      <a class="pub-thumb" href="{{ $page.RelPermalink }}" aria-label="Open publication">
+        <img src="{{ $img.RelPermalink }}" alt="" loading="lazy" decoding="async" />
+      </a>
+      {{ if $awards }}
+        <div class="award-row" aria-label="Awards">
+          {{ range $awards }}
+            {{ $label := .label }}
+            {{ $href := .href }}
+            {{ if $href }}
+              {{ $isExternal := or (hasPrefix $href "http://") (hasPrefix $href "https://") }}
+              <a class="badge badge--gold award-badge" href="{{ $href }}" title="{{ $label }}"{{ if $isExternal }} target="_blank" rel="noopener"{{ end }}>{{ $label }}</a>
+            {{ else }}
+              <span class="badge badge--gold award-badge" title="{{ $label }}">{{ $label }}</span>
+            {{ end }}
+          {{ end }}
+        </div>
+      {{ end }}
+    </div>
   {{ else }}
     <a class="pub-thumb" href="{{ $page.RelPermalink }}" aria-label="Open publication">PDF</a>
   {{ end }}
@@ -91,21 +107,6 @@
         {{ with $links.pdf }}<a class="btn" href="{{ . }}" target="_blank" rel="noopener">PDF</a>{{ end }}
         {{ with $links.code }}<a class="btn" href="{{ . }}" target="_blank" rel="noopener">Code</a>{{ end }}
         {{ with $links.project }}<a class="btn" href="{{ . }}" target="_blank" rel="noopener">Project</a>{{ end }}
-      </div>
-    {{ end }}
-
-    {{ if $awards }}
-      <div class="award-row" aria-label="Awards">
-        {{ range $awards }}
-          {{ $label := .label }}
-          {{ $href := .href }}
-          {{ if $href }}
-            {{ $isExternal := or (hasPrefix $href "http://") (hasPrefix $href "https://") }}
-            <a class="badge badge--gold award-badge" href="{{ $href }}"{{ if $isExternal }} target="_blank" rel="noopener"{{ end }}>{{ $label }}</a>
-          {{ else }}
-            <span class="badge badge--gold award-badge">{{ $label }}</span>
-          {{ end }}
-        {{ end }}
       </div>
     {{ end }}
   </div>
