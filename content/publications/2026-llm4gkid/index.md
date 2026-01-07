@@ -16,7 +16,7 @@ tags:
   - "Adaptive Commercial Systems"
   - "Equitable Foodscapes"
 
-awards: { label: "Best Student Presentation Award (Silver)" }
+awards: { label: "Best Student Presentation" }
 
 links:
   pdf: "https://arxiv.org/abs/0000.00000"
