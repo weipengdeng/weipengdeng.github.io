@@ -879,17 +879,23 @@ a:hover {
 
 .pub-list {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 0.85rem;
 }
 
 .pub-card {
   display: grid;
-  grid-template-columns: minmax(0, 32%) 1fr;
+  grid-template-columns: minmax(0, 32%) minmax(0, 1fr);
   gap: 0.95rem;
   padding: 0.85rem;
+  min-width: 0;
   border-radius: 16px;
   border: 1px solid var(--border);
   background: var(--bg-elev);
+}
+
+.pub-card > * {
+  min-width: 0;
 }
 
 .pub-media {
@@ -977,6 +983,7 @@ a:hover {
 
 .award-badge {
   max-width: 100%;
+  min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -1243,7 +1250,7 @@ a:hover {
   }
 
   .pub-card {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .pub-thumb {
@@ -1260,5 +1267,12 @@ a:hover {
 
   .footer-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 420px) {
+  .award-badge {
+    white-space: normal;
+    text-align: center;
   }
 }
