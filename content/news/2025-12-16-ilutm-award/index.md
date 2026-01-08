@@ -8,7 +8,7 @@ I am honored to have received the **Best Student Presentation Award (Silver Priz
 The conference, hosted by the Wuhan University of Technology and co-hosted by the Beijing Institute of Technology, served as a premier international platform for discussing AI-powered integrated modeling and decision-making support for future urban planning.
 
 ### Research Highlight: Digital Visibility, Physical Obscurity
-Our award-winning presentation, titled **тАЬDigital Visibility, Physical Obscurity: Uncovering the Location Strategies of Ghost Kitchens in Platform Urbanism,тА?* explores the tension between digital platform presence and physical urban footprints. 
+Our award-winning presentation, titled **Digital Visibility, Physical Obscurity: Uncovering the Location Strategies of Ghost Kitchens in Platform Urbanism?** explores the tension between digital platform presence and physical urban footprints. 
 
 By utilizing multimodal data fusion and spatial modeling, our study:
 * Investigates how ghost kitchens challenge existing urban governance and regulatory frameworks.

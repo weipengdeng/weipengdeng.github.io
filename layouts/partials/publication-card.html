@@ -5,6 +5,33 @@
 {{ $year := $page.Params.year }}
 {{ $links := $page.Params.links }}
 {{ $desc := $page.Params.description }}
+{{ $pdfHref := "" }}
+{{ $pdfDownload := false }}
+{{ with $page.Resources.GetMatch "*.pdf" }}
+  {{ $pdfHref = .RelPermalink }}
+  {{ $pdfDownload = true }}
+{{ end }}
+{{ with $links }}
+  {{ with .pdf }}
+    {{ $candidate := printf "%v" . }}
+    {{ if or (hasPrefix $candidate "http://") (hasPrefix $candidate "https://") }}
+      {{ $pdfHref = $candidate }}
+      {{ $pdfDownload = false }}
+    {{ else if hasPrefix $candidate "/" }}
+      {{ $pdfHref = $candidate }}
+      {{ $pdfDownload = true }}
+    {{ else }}
+      {{ $res := $page.Resources.GetMatch $candidate }}
+      {{ if $res }}
+        {{ $pdfHref = $res.RelPermalink }}
+        {{ $pdfDownload = true }}
+      {{ else if not $pdfHref }}
+        {{ $pdfHref = $candidate }}
+        {{ $pdfDownload = true }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
 {{ $awards := slice }}
 {{ $awardInputs := slice }}
 {{ with $page.Params.awards }}{{ $awardInputs = $awardInputs | append . }}{{ end }}
@@ -102,11 +129,22 @@
       <p class="pub-abstract">{{ . }}</p>
     {{ end }}
 
-    {{ if $links }}
+    {{ $hasActions := false }}
+    {{ if $pdfHref }}{{ $hasActions = true }}{{ end }}
+    {{ with $links }}
+      {{ if or .code .project }}{{ $hasActions = true }}{{ end }}
+    {{ end }}
+
+    {{ if $hasActions }}
       <div class="pub-actions">
-        {{ with $links.pdf }}<a class="btn" href="{{ . }}" target="_blank" rel="noopener">PDF</a>{{ end }}
-        {{ with $links.code }}<a class="btn" href="{{ . }}" target="_blank" rel="noopener">Code</a>{{ end }}
-        {{ with $links.project }}<a class="btn" href="{{ . }}" target="_blank" rel="noopener">Project</a>{{ end }}
+        {{ if $pdfHref }}
+          {{ $pdfIsExternal := or (hasPrefix $pdfHref "http://") (hasPrefix $pdfHref "https://") }}
+          <a class="btn" href="{{ $pdfHref }}"{{ if $pdfIsExternal }} target="_blank" rel="noopener"{{ else if $pdfDownload }} download{{ end }}>PDF</a>
+        {{ end }}
+        {{ with $links }}
+          {{ with .code }}<a class="btn" href="{{ . }}" target="_blank" rel="noopener">Code</a>{{ end }}
+          {{ with .project }}<a class="btn" href="{{ . }}" target="_blank" rel="noopener">Project</a>{{ end }}
+        {{ end }}
       </div>
     {{ end }}
   </div>

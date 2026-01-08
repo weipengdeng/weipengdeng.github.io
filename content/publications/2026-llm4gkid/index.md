@@ -19,7 +19,7 @@ tags:
 awards: { label: "Best Student Presentation Award (Silver)" }
 
 links:
-  pdf: "https://arxiv.org/abs/0000.00000"
+  pdf: "LLM4GKID.pdf"
   code: "https://github.com/weipengdeng/LLM4GKID"
   project: "https://weipengdeng.github.io/LLM4GKID/"
 
