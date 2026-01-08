@@ -1,8 +1,8 @@
 <header class="site-header">
   <div class="container nav">
-    <a class="brand" href="{{ "/" | relURL }}">
+    <a class="brand" href="{{ "/" | relURL }}" aria-label="{{ .Site.Title }}">
       <span class="brand__dot" aria-hidden="true"></span>
-      <span>{{ .Site.Title }}</span>
+      <span class="brand__text">{{ .Site.Title }}</span>
     </a>
 
     <nav class="nav-links" aria-label="Primary navigation">
@@ -17,4 +17,3 @@
     </nav>
   </div>
 </header>
-

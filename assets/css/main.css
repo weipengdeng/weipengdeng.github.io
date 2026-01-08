@@ -1216,6 +1216,10 @@ a:hover {
 }
 
 @media (max-width: 860px) {
+  .brand__text {
+    display: none;
+  }
+
   .home-grid-2 {
     grid-template-columns: 1fr;
   }
