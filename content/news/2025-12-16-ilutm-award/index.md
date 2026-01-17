@@ -20,6 +20,9 @@ This project is the result of a wonderful collaboration with **Yihong Tang** (Mc
 
 I would like to express my deepest gratitude to the ILUTM-9 organizing committee and the award committee for this recognition, and to my team for their invaluable contributions.
 
+
+![Diplomas](diplomas.png)
+
 ---
 **Links:**
 * [Project Website: LLM4GKID](https://weipengdeng.github.io/LLM4GKID)
