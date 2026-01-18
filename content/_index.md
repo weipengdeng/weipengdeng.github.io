@@ -25,7 +25,7 @@ education:
     logo: "images/logos/hku_logo.png"
   - institution: "National University of Singapore"
     degree: "Visiting PhD in Urban Analytics Lab"
-    dates: "2025 - Present"
+    dates: "2025 - 2026"
     short: "NUS"
     logo: "images/logos/nus_logo.png"
   - institution: "The University of Melbourne"

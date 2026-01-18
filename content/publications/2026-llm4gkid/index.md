@@ -35,3 +35,4 @@ The proliferation of ghost kitchens (i.e., delivery-only restaurants without phy
 ---
 **Links:**
 * [Read more about this article](https://weipengdeng.github.io/LLM4GKID/)
+* [The link to the online version (Coming soon)](https://doi.org/10.1109/TCSS.2026.3650928)
