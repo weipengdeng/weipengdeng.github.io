@@ -12,6 +12,7 @@ tags:
   - "Adapative Commercial Systems"
   - "Publicly Funded Project"
 
+sdgs: [8, 9, 10, 11, 12, 17]
 # links:
 #   demo: "https://your-site.github.io/"
 #   code: "https://github.com/your-handle/your-repo"
@@ -20,7 +21,6 @@ tags:
 
 ## Overview
 
-## Overview
 A data-driven framework to understand how heterogeneous **online–offline (virtual–physical) consumption demand** reshapes the hierarchy, boundaries, and catchments of urban commercial centres over time, and to support early warning of demand–supply mismatch.
 
 ## Why this matters
@@ -36,11 +36,6 @@ Rapid digital transformation is changing how residents access goods and services
 3. **Mechanism modelling:** explain and predict spatial-structure evolution with interpretable machine learning and time-series diagnostics to detect **thresholds** and **lags** in demand–structure coupling.
 4. **Early warning & scenario simulation:** simulate future demand trajectories and flag locations where demand–supply mismatch is likely to emerge or worsen; translate findings into planning-oriented optimisation suggestions.
 
-## Expected outputs
-- Spatialised maps of online/offline demand heterogeneity by population groups  
-- A reproducible pipeline for commercial-centre delineation, hierarchy, and catchment analysis  
-- Mechanism insights (thresholds, lags, nonlinear interactions) linking demand shifts to spatial restructuring  
-- A lightweight early-warning workflow for identifying potential demand–supply mismatch hotspots  
 
 ## Keywords
 urban commercial centres; spatial structure; digital consumption; online–offline interaction; spatio-temporal modelling; interpretable machine learning; planning support
