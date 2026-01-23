@@ -36,9 +36,9 @@ date: 2026-01-23
 
 {{% langtab id="en" label="English" %}}
 
-I am honored to take part in a research initiative jointly launched by the **Qiyao Institute** and the **Faculty of Architecture, The University of Hong Kong (HKU)**, focusing on cultural and sports facilities and venue planning in Hong Kong. The research team consists of **Prof. Weifeng Li** and **Prof. Tianren Yang**,a nd other experts and scholars together with collaborators from different disciplines.
+I am honored to take part in a research initiative jointly launched by the **Qiyao Institute** and the **Faculty of Architecture, The University of Hong Kong (HKU)**, focusing on cultural and sports facilities and venue planning in Hong Kong. The research team consists of **Prof. Weifeng Li**, **Prof. Tianren Yang**, and other experts together with collaborators from different disciplines.
 
-This project aims to provide a data-driven, systematic assessment of existing cultural and sports venues—identifying key gaps and operational “pain points”—and to propose actionable planning and policy recommendations. We will also adapt and apply data-integration and analytical methods developed in our other projects to support evidence-based decision-making for Hong Kong’s cultural and sports development, serving both residents and visitors.
+This project aims to provide a data-driven, systematic assessment of existing cultural and sports venues. By identifying key gaps and operational “pain points”, we strive to propose actionable planning and policy recommendations. We will also adapt and apply data-integration and analytical methods developed in our other projects to support evidence-based decision-making for Hong Kong’s cultural and sports development, serving both residents and visitors.
 
 > “Large cultural and sports venues in Hong Kong are routinely operating at over 90% utilization… the sector urgently needs more diverse and flexible space resources.” — Hon. Kenneth Fok (excerpt, translated)
 

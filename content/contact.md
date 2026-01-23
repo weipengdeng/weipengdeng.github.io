@@ -3,6 +3,6 @@
   description: "How to reach me."
 ---
 
-- Email: `wpdeng@connect.hku.hk`
+- Email: `wpdeng[at]connect.hku.hk`
 - GitHub: `https://github.com/weipengdeng`
 
