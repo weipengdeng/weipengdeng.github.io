@@ -1,0 +1,11 @@
+{{- $id := .Get "id" | default "" -}}
+{{- if not $id -}}
+  {{- errorf "langtab shortcode requires id: %s" .Position -}}
+{{- end -}}
+{{- $label := .Get "label" | default $id -}}
+
+<section class="lang-tabs__panel" data-langtab-id="{{ $id }}" data-langtab-label="{{ $label }}">
+  <div class="lang-tabs__fallback-title">{{ $label }}</div>
+  {{ .Inner }}
+</section>
+

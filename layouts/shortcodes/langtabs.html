@@ -1,0 +1,10 @@
+{{- $default := .Get "default" | default "" -}}
+{{- $storage := .Get "storage" | default "langtabs:lang" -}}
+
+<div class="lang-tabs" data-langtabs data-default="{{ $default }}" data-storage="{{ $storage }}">
+  <div class="lang-tabs__nav" role="tablist" aria-label="Language"></div>
+  <div class="lang-tabs__panels">
+    {{ .Inner }}
+  </div>
+</div>
+

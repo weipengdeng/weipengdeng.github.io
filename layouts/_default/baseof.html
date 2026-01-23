@@ -16,6 +16,11 @@
     {{ $imgJs := resources.Get "js/image-interactions.js" | minify | fingerprint }}
     <script defer src="{{ $imgJs.RelPermalink }}" integrity="{{ $imgJs.Data.Integrity }}"></script>
 
+    {{ if .HasShortcode "langtabs" }}
+      {{ $langTabsJs := resources.Get "js/lang-tabs.js" | minify | fingerprint }}
+      <script defer src="{{ $langTabsJs.RelPermalink }}" integrity="{{ $langTabsJs.Data.Integrity }}"></script>
+    {{ end }}
+
     {{ if or .IsHome (and (eq .Section "publications") (eq .Kind "section")) }}
       {{ $pubJs := resources.Get "js/publications-filter.js" | minify | fingerprint }}
       <script defer src="{{ $pubJs.RelPermalink }}" integrity="{{ $pubJs.Data.Integrity }}"></script>

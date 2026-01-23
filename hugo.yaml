@@ -2,6 +2,7 @@ baseURL: "https://weipengdeng.github.io/"
 languageCode: "en-us"
 title: "Weipeng Deng"
 enableRobotsTXT: true
+enableGitInfo: true
 paginate: 25
 
 taxonomies:

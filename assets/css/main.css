@@ -1215,6 +1215,55 @@ a:hover {
   box-shadow: var(--shadow);
 }
 
+.lang-tabs {
+  margin-top: 1rem;
+}
+
+.lang-tabs__nav {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin: 0.75rem 0 1rem;
+}
+
+.lang-tabs__btn {
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--bg) 70%, transparent);
+  color: var(--muted);
+  border-radius: 999px;
+  padding: 0.34rem 0.65rem;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.lang-tabs__btn:hover {
+  box-shadow: var(--shadow);
+}
+
+.lang-tabs__btn[aria-selected="true"] {
+  background: var(--chip);
+  color: var(--chip-text);
+}
+
+.lang-tabs__fallback-title {
+  font-weight: 850;
+  letter-spacing: -0.015em;
+  margin: 0 0 0.85rem;
+  color: var(--muted);
+}
+
+.lang-tabs[data-ready="1"] .lang-tabs__fallback-title {
+  display: none;
+}
+
+.lang-tabs[data-ready="1"] .lang-tabs__panel {
+  display: none;
+}
+
+.lang-tabs[data-ready="1"] .lang-tabs__panel.is-active {
+  display: block;
+}
+
 @media (max-width: 860px) {
   .brand__text {
     display: none;
