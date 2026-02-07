@@ -3,7 +3,7 @@
     <h2>{{ .Title }}</h2>
     {{ if .Content }}<div class="prose">{{ .Content }}</div>{{ end }}
 
-    {{ $news := .Pages.ByDate.Reverse }}
+    {{ $news := .RegularPagesRecursive.ByDate.Reverse }}
     {{ if not (len $news) }}
       <div class="item__meta">Add Markdown files under <code>content/news/</code>.</div>
     {{ else }}
@@ -18,4 +18,3 @@
     {{ end }}
   </section>
 {{ end }}
-
