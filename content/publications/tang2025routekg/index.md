@@ -12,7 +12,7 @@ authors:
   - "Zhenliang Ma"
 
 venue: "IEEE TITS"
-year: 2025o
+year: 2025
 
 tags:
   - "Adaptive Commercial Systems"
