@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Dosis:wght@500;600;700&display=swap");
+
 :root {
   color-scheme: light dark;
 
@@ -982,12 +984,18 @@ a:hover {
 }
 
 .award-badge {
+  display: inline-block;
   max-width: 100%;
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   text-decoration: none;
+  font-family: "Dosis", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans",
+    "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  font-size: 0.74rem;
+  letter-spacing: -0.005em;
+  line-height: 1.05;
 }
 
 .award-badge:hover {
