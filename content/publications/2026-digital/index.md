@@ -33,9 +33,11 @@ sdgs: [2, 3, 10, 11]
 @article{deng2026digital,
   title={Digital visibility, physical obscurity: Uncovering the location strategies of ghost kitchens in platform urbanism},
   author={Deng, Weipeng and Tang, Yihong and Liu, Yaxin and Yang, Tianren},
-  journal={Under Review},
+  journal={Journal of Retailing and Consumer Services},
+  volume={91},
+  pages={104766},
   year={2026},
-  keywords={Digital-physical nexus;Urban foodscape;Platform urbanism;Planning support systems;Machine learning}
+  publisher={Elsevier}
 }
 ```
 ---
