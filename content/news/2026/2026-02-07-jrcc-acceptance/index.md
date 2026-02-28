@@ -1,5 +1,5 @@
 ---
-title: "Paper on Ghost Kitchens accepted by Journal of Retailing and Consumer Services"
+title: "Forthcoming: Spatial Logic of Ghost Kitchens (Journal of Retailing and Consumer Services)"
 date: 2026-02-07
 ---
 
